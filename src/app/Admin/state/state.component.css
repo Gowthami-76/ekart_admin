@@ -1,0 +1,72 @@
+.card {
+    
+}
+
+.card .card-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;      
+} 
+
+#exampleModal .stateadd_modal {
+
+}
+
+#exampleModal .stateadd_modal .add_state label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 13px;
+}
+
+#exampleModal .stateadd_modal .add_state label i {
+    color: red;
+}
+
+#exampleModal .stateadd_modal .add_state_btn {
+    text-align: center;
+    margin: 15px 0px 10px 0px;
+}
+
+tbody tr td {
+    text-align: center;
+}
+
+.table .text-primary th{
+    text-align: center;
+}
+
+.btn-green{
+    background-color: #6ac16a;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-blue{
+    background-color: #2ab0df;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-red{
+    background-color: #f90d0dc7;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.error {
+    font-size: 12px;
+    color: red;
+    margin: 8px 0px;
+}
+
+

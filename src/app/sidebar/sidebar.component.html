@@ -1,0 +1,45 @@
+
+<div class="sidebar-wrapper">
+  <div class="logo" style="margin-right: 10px;">
+    <a class="simple-text logo-mini">
+      <div class="logo-image-small">
+        <img src="assets/img/logo.png" alt="#" width="100%" />
+      </div>
+    </a>
+    <a class="simple-text logo-normal">
+      Product Market
+    </a>
+  </div>
+    <ul class="nav">
+        <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
+            <a [routerLink]="[menuItem.path]">
+                <i class="nc-icon {{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+            </a>
+        </li>
+
+        <li>
+          <div class="tabs">
+            <div class="tab">
+              <input type="checkbox" id="chck1">
+              <label class="tab-label" for="chck1">LOCATIONS</label>
+              <div class="tab-content">
+                <a [routerLink]="['/State']">STATE</a>
+              </div>
+  
+              <div class="tab-content">
+                <a [routerLink]="['/District']">DISTRICT</a>
+              </div>
+  
+              <div class="tab-content">
+                <a [routerLink]="['/Mandal']">MANDAL</a>
+              </div>
+
+              <div class="tab-content">
+                <a [routerLink]="['/Village']">VILLAGE</a>
+              </div>
+            </div>
+          </div>
+        </li>
+    </ul>
+</div>

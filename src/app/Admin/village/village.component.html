@@ -1,0 +1,400 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">VILLAGES LIST</h4>
+      <div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Add Village
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="text-primary">
+            <th>S.No</th>
+            <th>State Name</th>
+            <th>District Name</th>
+
+            <th>Mandal Name</th>
+
+            <th>Village Name</th>
+
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Data of villageTableData; let i = index">
+              <td>
+                {{ i + 1 }}
+              </td>
+              <td>
+                {{ Data?.state }}
+              </td>
+              <td>
+                {{ Data?.district }}
+              </td>
+              <td>
+                {{ Data?.mandal }}
+              </td>
+              <td>
+                {{ Data?.village }}
+              </td>
+              <td>
+                <!-- <button class="btn-green" type="button">
+                                  <i class="fas fa-eye"></i>
+                                </button> -->
+                <button
+                  class="btn-blue"
+                  type="button"
+                  (click)="VillageEdit(Data)"
+                >
+                  <i class="fa fa-pencil"></i>
+                </button>
+                <button
+                  class="btn-red"
+                  type="button"
+                  (click)="VillageDelete(Data)"
+                >
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" (click)="villageType = 'add'">Add village</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="modalClose()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section class="villageadd_modal" [formGroup]="VillageModal">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="custome-select">
+                <label
+                  >STATE NAME&nbsp;<sup><i class="fa fa-asterisk"></i></sup
+                ></label>
+                <select (change)="getDistrictName()"
+                  [class.is-invalid]="
+                    (VillageModal.get('StateName').invalid &&
+                      VillageModal.get('StateName').touched) ||
+                    (VillageModal.get('StateName').pristine && hasError)
+                  "
+                  class="form-control"
+                  formControlName="StateName"
+                >
+                  <option>Select State Name</option>
+                  <option *ngFor="let States of getStatesList">
+                    {{ States?.state }}
+                  </option>
+                </select>
+                <span
+                  class="error"
+                  *ngIf="
+                    (VillageModal.get('StateName').invalid &&
+                      VillageModal.get('StateName').touched) ||
+                    (VillageModal.get('StateName').pristine && hasError)
+                  "
+                  >Please Add State Name</span
+                >
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="custome-select">
+                <label
+                  >DISTRICT NAME&nbsp;<sup><i class="fa fa-asterisk"></i></sup
+                ></label>
+                <select (change)="getMandalName()"
+                  [class.is-invalid]="
+                    (VillageModal.get('DistrictName').invalid &&
+                      VillageModal.get('DistrictName').touched) ||
+                    (VillageModal.get('DistrictName').pristine && hasError)
+                  "
+                  class="form-control"
+                  formControlName="DistrictName"
+                >
+                  <option>Select District Name</option>
+                  <option *ngFor="let district of getDistrictList">
+                    {{ district?.district }}
+                  </option>
+                </select>
+                <span
+                  class="error"
+                  *ngIf="
+                    (VillageModal.get('DistrictName').invalid &&
+                      VillageModal.get('DistrictName').touched) ||
+                    (VillageModal.get('DistrictName').pristine && hasError)
+                  "
+                  >Please Add District Name</span
+                >
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="custome-select">
+                <label
+                  >MANDAL NAME&nbsp;<sup><i class="fa fa-asterisk"></i></sup
+                ></label>
+                <select
+                  [class.is-invalid]="
+                    (VillageModal.get('MandalName').invalid &&
+                      VillageModal.get('MandalName').touched) ||
+                    (VillageModal.get('MandalName').pristine && hasError)
+                  "
+                  class="form-control"
+                  formControlName="MandalName"
+                >
+                  <option>Select Mandal Name</option>
+                  <option *ngFor="let mandal of GetMandalsDetails">
+                    {{ mandal?.mandal }}
+                  </option>
+                </select>
+                <span
+                  class="error"
+                  *ngIf="
+                    (VillageModal.get('MandalName').invalid &&
+                      VillageModal.get('MandalName').touched) ||
+                    (VillageModal.get('MandalName').pristine && hasError)
+                  "
+                  >Please Add Mandal Name</span
+                >
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="add_village">
+                <label
+                  >VILLAGE NAME&nbsp;<sup
+                    ><i class="fa fa-asterisk" aria-hidden="true"></i></sup
+                ></label>
+                <input
+                  [class.is-invalid]="
+                    (VillageModal.get('VillageName').invalid &&
+                      VillageModal.get('VillageName').touched) ||
+                    (VillageModal.get('VillageName').pristine && hasError)
+                  "
+                  type="text"
+                  class="form-control"
+                  formControlName="VillageName"
+                />
+
+                <span
+                  class="error"
+                  *ngIf="
+                    (VillageModal.get('VillageName').invalid &&
+                      VillageModal.get('VillageName').touched) ||
+                    (VillageModal.get('VillageName').pristine && hasError)
+                  "
+                  >Please Add village Name</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 add_village_btn">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              (click)="addingvillage()"
+            >
+              Add Village
+            </button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- village edit Model -->
+<div
+  class="modal fade"
+  id="villageEditModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="villageEditModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="villageEditModalLabel">Village Info</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editVillageForm">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label
+                >State Name
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <select
+                [class.is-invalid]="
+                  (editVillageForm.get('stName').invalid &&
+                    editVillageForm.get('stName').touched) ||
+                  (editVillageForm.get('stName').pristine && hasError)
+                "
+                class="form-control"
+                formControlName="stName"
+              >
+                <!-- <option>Select State</option> -->
+                <option *ngFor="let states of getStatesList">
+                  {{ states.state }}
+                </option>
+              </select>
+              <span
+                class="error"
+                *ngIf="
+                  (editVillageForm.get('stName').invalid &&
+                    editVillageForm.get('stName').touched) ||
+                  (editVillageForm.get('stName').pristine && hasError)
+                "
+                >Please Add State Name</span
+              >
+            </div>
+
+            <div class="col-md-6 form-group">
+              <label
+                >District Name
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <select
+                class="form-control"
+                [class.is-invalid]="
+                  (editVillageForm.get('distName').invalid &&
+                    editVillageForm.get('distName').touched) ||
+                  (editVillageForm.get('distName').pristine && hasError)
+                "
+                formControlName="distName"
+              >
+                <!-- <option>Select District Name</option> -->
+                <option *ngFor="let Districts of getDistrictList">
+                  {{ Districts?.district }}
+                </option>
+                <span
+                  class="error"
+                  *ngIf="
+                    (editVillageForm.get('distName').invalid &&
+                      editVillageForm.get('distName').touched) ||
+                    (editVillageForm.get('distName').pristine && hasError)
+                  "
+                  >Please Add District Name</span
+                >
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <div class="add_mandal">
+                <label
+                  >MANDAL NAME&nbsp;<sup
+                    ><i class="fa fa-asterisk" aria-hidden="true"></i></sup
+                ></label>
+                <select
+                  [class.is-invalid]="
+                    (editVillageForm.get('MName').invalid &&
+                      editVillageForm.get('MName').touched) ||
+                    (editVillageForm.get('MName').pristine && hasError)
+                  "
+                  class="form-control"
+                  formControlName="MName"
+                >
+                  <!-- <option>Select Mandal Name</option> -->
+                  <option *ngFor="let mandal of GetMandalsDetails">
+                    {{ mandal?.mandal }}
+                  </option>
+                </select>
+                <span
+                  class="error"
+                  *ngIf="
+                    (editVillageForm.get('MName').invalid &&
+                      editVillageForm.get('MName').touched) ||
+                    (editVillageForm.get('MName').pristine && hasError)
+                  "
+                  >Please Add Mandal Name</span
+                >
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="add_village">
+                <label
+                  >VILLAGE NAME&nbsp;<sup
+                    ><i class="fa fa-asterisk" aria-hidden="true"></i></sup
+                ></label>
+                <input
+                  [class.is-invalid]="
+                    (editVillageForm.get('VName').invalid &&
+                      editVillageForm.get('VName').touched) ||
+                    (editVillageForm.get('VName').pristine && hasError)
+                  "
+                  type="text"
+                  class="form-control"
+                  formControlName="VName"
+                />
+
+                <span
+                  class="error"
+                  *ngIf="
+                    (editVillageForm.get('VName').invalid &&
+                      editVillageForm.get('VName').touched) ||
+                    (editVillageForm.get('VName').pristine && hasError)
+                  "
+                  >Please Add village Name</span
+                >
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="updatevillage()">
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

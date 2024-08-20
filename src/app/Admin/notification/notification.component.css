@@ -1,0 +1,149 @@
+.brands_Upload_section .card .card-body .brands_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0px 20px 0px;
+  }
+  .brands_Upload_section .card .card-body .brands_header h4.card-title {
+    font-size: 20px;
+    margin-top: 0px!important;
+  }
+  .brands_Upload_section .card .card-body .brands_header button {
+    float: right;
+    font-size: 13px;
+    box-shadow: none;
+    border: none;
+    background-color: #28b8e8;
+    background-image: linear-gradient(to right, #2cbae7, #0f347d);
+    padding: 10px 20px;
+    width: 190px;
+    color: #fff;
+    transition: 0.8s ease-in-out;
+  }
+  .brands_Upload_section .card .card-body #myTable img {
+    height: 50px;
+  }
+  .brands_Upload_section .card .card-body #myTable thead tr {
+    background-color: #005db2;
+  }
+  .brands_Upload_section .card .card-body #myTable thead tr th {
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    text-align: center;
+  }
+  .brands_Upload_section .card .card-body #myTable tbody tr td {
+    vertical-align: middle;
+    align-items: center;
+    font-size: 14px;
+    padding: 20px 10px;
+    text-align: center;
+  }
+  .brands_Upload_section .card .card-body #myTable tbody tr .table_actions button {
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+  }
+  .brands_Upload_section .card .card-body #myTable tbody tr .table_actions button i {
+    font-size: 12px;
+  }
+  .brands_Upload_section .card .card-body #myTable tbody tr .table_actions button:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  .brands_Upload_section .card .card-body #myTable tbody tr .table_actions button.btn-green {
+    background-color: #6ac16a;
+  }
+  .brands_Upload_section .card .card-body #myTable tbody tr .table_actions button.btn-blue {
+    background-color: #2ab0df;
+  }
+  .brands_Upload_section .card .card-body #myTable tbody tr .table_actions button.btn-red {
+    background-color: #f90d0dc7;
+  }
+  #RatingviewModal .modal-header h6 {
+    font-size: 16px;
+  }
+  #RatingviewModal .ratingdetails {
+    margin-bottom: 20px;
+  }
+  #RatingviewModal .ratingdetails h6 {
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  .modal-dialog {
+    margin-top: 0px;
+  }
+  .lstyle {
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1rem;
+    text-transform: uppercase;
+  }
+  .tstyle {
+    box-shadow: none;
+    outline: none;
+    margin: 10px 0;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    height: 1.5rem;
+  }
+  .linkss {
+    border: none;
+    margin-right: 10px;
+    padding: 15px 15px;
+    outline: none;
+  }
+  .label-field{
+    font-size: 18px;
+    margin-right: 35px;
+  }
+  .form-control{
+    width: 100%;
+  padding: 7px 20px;
+  /* margin: 8px 0; */
+  box-sizing: border-box;
+  outline-color: none;
+  outline: none;
+  border-radius: 5px;
+  
+  }
+  select{
+    border-color: black;
+    border-width: 2px;
+    
+  }
+  input{
+    /* border-color: black; */
+    border-width: 2px;
+    height:auto;
+  }
+
+  .new_brands{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+  }
+  .tab-contentss{
+    margin-top: 30px;
+  }
+
+  .notify-ul li{
+    margin: 7px 0px;
+  }
+
+  .view_notification{
+    padding: 0px 25px;
+  }
+
+  .view_notification label{
+    font-weight: 600;
+    font-size: 16px;
+    
+  }

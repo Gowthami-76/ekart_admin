@@ -1,0 +1,250 @@
+<!-- Create Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Language Info</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modelClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="LanguageForm">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Language Name
+                                <sup>
+                                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                                </sup>
+                            </label>
+                            <input type="text" class="form-control" placeholder="Enter Language"
+                                formControlName="languageName" 
+                                [class.is-invalid]="(LanguageForm.get('languageName')?.invalid &&
+                                LanguageForm.get('languageName')?.touched) ||
+                                (LanguageForm.get('languageName')?.pristine && hasError)"
+                                />
+                                <span class="error" *ngIf="(LanguageForm.get('languageName')?.invalid &&
+                                LanguageForm.get('languageName')?.touched) ||
+                                (LanguageForm.get('languageName')?.pristine && hasError)"                              
+                                >Please Enter Your Valid Language Name
+                            </span>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Local Key
+                                <sup>
+                                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                                </sup>
+                            </label>
+                            <input type="text" class="form-control" placeholder="Enter Local Key" maxlength="2"
+                                formControlName="localkey" 
+                                [class.is-invalid]="(LanguageForm.get('localkey')?.invalid &&
+                                LanguageForm.get('localkey')?.touched) ||
+                                (LanguageForm.get('localkey')?.pristine && hasError)"
+                                />
+                                <span class="error" *ngIf="(LanguageForm.get('localkey')?.invalid &&
+                                LanguageForm.get('localkey')?.touched) ||
+                                (LanguageForm.get('localkey')?.pristine && hasError)"                              
+                                >Please Enter Your Valid Local Key
+                            </span>
+                        </div>
+
+                        <!-- <div class="col-md-6 form-group">
+                            <label>Key Name
+                            </label>
+                            <input type="text" class="form-control" placeholder="Enter Keys"
+                                formControlName="keyName" 
+                                [class.is-invalid]="(LanguageForm.get('keyName')?.invalid &&
+                                LanguageForm.get('keyName')?.touched) ||
+                                LanguageForm.get('keyName')?.pristine && hasError"
+                                />
+                                <span class="error" *ngIf="(LanguageForm.get('keyName')?.invalid &&
+                                LanguageForm.get('keyName')?.touched) ||
+                                LanguageForm.get('keyName')?.pristine && hasError">
+                                Please Enter Your Valid Key Name
+                            </span>
+                        </div> -->
+                    </div>
+
+                    <div class="addLang_button">
+                        <button type="submit" class="btn add-product" (click)="languageAdd()">Add language</button>
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">Add Product</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Languages</h4>
+                <div class="create_button" data-toggle="modal" data-target="#exampleModal">
+                    <!-- <button type="btn" class="add-product">Add Product</button> -->
+                    <button type="button" class="add-product">
+                        Add Language
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>
+                                S.no
+                            </th>
+                            <th>
+                                Language Name
+                            </th>
+                            <!-- <th>
+                                Key Names
+                            </th> -->
+                            <th>
+                                actions
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let languages of getlistofLanguages; let i = index">
+                                <td>
+                                    {{ i + 1 }}
+                                </td>
+                                <td>
+                                    {{ languages?.language }}
+                                </td>
+                                <!-- <td>
+                                    <ul *ngFor="let keyLangs of languages?.keys">
+                                        <li>{{ keyLangs }}</li>
+                                    </ul>
+                                </td> -->
+                                <td>
+                                    <button class="btn-green" type="button" (click)="Onview(languages)">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-blue" type="button" (click)="OnEdit(languages)">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                    <button class="btn-red" type="button" (click)="OnDelete(languages)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- View  -->
+<div class="modal fade" id="languageViewModal" tabindex="-1" role="dialog" aria-labelledby="languageViewModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="languageViewModalLabel">Language View</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section>
+                    <div class="view_languages">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="language_name">
+                                    <label>Language Name:</label>
+                                    <p>{{ languageView?.language }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="language_name">
+                                    <label>locale Key:</label>
+                                    <p>{{languageView?.locale}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product edit Model -->
+<div class="modal fade" id="EditLanguageModal" tabindex="-1" role="dialog" aria-labelledby="EditLanguageModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="EditLanguageModalLabel">Language Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editLanguageForm">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>Language Name
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input type="text" placeholder="" class="form-control" formControlName="langName" [class.is-invalid]="
+                  (editLanguageForm.get('langName')?.invalid &&
+                    editLanguageForm.get('langName')?.touched) ||
+                  (editLanguageForm.get('langName')?.pristine && hasError)
+                " />
+
+              <span class="error" *ngIf="
+                  (editLanguageForm.get('langName')?.invalid &&
+                    editLanguageForm.get('langName')?.touched) ||
+                  (editLanguageForm.get('langName')?.pristine && hasError)
+                ">
+                Please enter your Valid Product Name
+              </span>
+            </div>
+
+            <!-- <div class="col-md-6 form-group">
+              <label>Key Names
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input [class.is-invalid]="
+                  (editLanguageForm.get('kName')?.invalid &&
+                    editLanguageForm.get('kName')?.touched) ||
+                  (editLanguageForm.get('kName')?.pristine && hasError)
+                " type="text" placeholder="" class="form-control" formControlName="kName" />
+              <span class="error" *ngIf="
+                  (editLanguageForm.get('kName')?.invalid &&
+                    editLanguageForm.get('kName')?.touched) ||
+                  (editLanguageForm.get('kName')?.pristine && hasError)
+                ">
+                Please enter your valid product size
+              </span>
+            </div> -->
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="updateLanguage()">Update Language</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+
+<nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+  <div class="container-fluid">
+    <div class="navbar-wrapper">
+      <div class="navbar-toggle">
+        <button type="button" class="navbar-toggler" (click)="sidebarToggle()">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </button>
+      </div>
+      <a class="navbar-brand" href="javascript:void(0)">{{getTitle()}}</a>
+    </div>
+    <button class="navbar-toggler" type="button" (click)="collapse()"
+      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="collapseExample" [ngbCollapse]="isCollapsed">
+    <!-- <form>
+        <div class="input-group no-border">
+          <input type="text" value="" class="form-control" placeholder="Search...">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <i class="nc-icon nc-zoom-split"></i>
+            </div>
+          </div>
+        </div>
+      </form> -->
+      <ul class="navbar-nav" >
+        <li class="nav-item" style="margin-right: 5px;">
+          <button type="button" class="add-product" (click)="adminLogout()">logout</button>
+        </li>
+
+        <li class="nav-item btn-rotate" ngbDropdown placement="bottom-left">
+         <button type="button" class="add-product" (click)="adminChangePassword()">Change Password</button>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link btn-rotate" href="javascript:void(0)">
+            <i class="nc-icon nc-settings-gear-65"></i>
+            <p>
+              <span class="d-lg-none d-md-block">Account</span>
+            </p>
+          </a>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+</nav>
+           <!-- Modal -->
+           <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modelReset()">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form [formGroup]="editLoginForm">
+                    <div class="form-group-wrap">
+                    
+                      <div class="form-group">
+                        <label>
+                         Change Password
+                        </label>
+                        <input
+                          type="password"
+                          class="form-control"
+                          id="password"
+                          formControlName="changePassword"
+                          [class.is-invalid]="
+                        (editLoginForm.get('changePassword').invalid &&
+                          editLoginForm.get('changePassword').touched) ||
+                        (editLoginForm.get('changePassword').pristine && hasError)
+                      "
+                        />
+                        <span
+                          class="error"
+                          *ngIf="
+                            (editLoginForm.get('changePassword').invalid &&
+                              editLoginForm.get('changePassword').touched) ||
+                            (editLoginForm.get('changePassword').pristine && hasError)
+                          "
+                        > 
+          
+                          This field is required
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modelReset()">Close</button>
+                  <button type="button" class="btn btn-primary" (click)="changeAdminPassword()">Update Password</button>
+                </div>
+              </div>
+            </div>
+          </div>

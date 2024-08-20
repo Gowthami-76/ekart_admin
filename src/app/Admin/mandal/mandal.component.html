@@ -1,0 +1,204 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">MANDALS LIST</h4>
+            <div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="mandalType = 'add'">
+                    Add mandal
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class=" text-primary">
+                        <th>
+                            S.No
+                        </th>
+                        <th>
+                            State Name
+                        </th>
+                        <th>
+                            District Name
+                        </th>
+                        <th>
+                            Mandal Name
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let Data of getStatesList; let i = index">
+                            <td>
+                                {{ i + 1 }}
+                            </td>
+                            <td>
+                                {{ Data?.state }}
+                            </td>
+                            <td>
+                                {{ Data?.district }}
+                            </td>
+                            <td>
+                                {{ Data?.mandal }}
+                            </td>
+                            <td>
+                                <!-- <button class="btn-green" type="button">
+                                  <i class="fas fa-eye"></i>
+                                </button> -->
+                                <button class="btn-blue" type="button" (click)="MandalEdit(Data)" >
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button class="btn-red" type="button" (click)="MandalDelete(Data)" >
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add mandal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section class="mandaladd_modal" [formGroup]="mandalForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="custome-select">
+                                <label>State Name&nbsp;<sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
+                                <select class="form-control" [class.is-invalid]="mandalForm.get('stateName').invalid && mandalForm.get('stateName').touched || 
+                                mandalForm.get('stateName').pristine && hasError" formControlName="stateName" (change)="getDistrictName()">
+                                <option>Select State Name</option>
+                                <option *ngFor="let States of filteredAgencyList()">{{ States?.state }}</option>
+
+                                <span class="error" *ngIf="mandalForm.get('stateName').invalid && mandalForm.get('stateName').touched || 
+                                mandalForm.get('stateName').pristine && hasError">Please Add State Name</span>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="custome-select">
+                                <label>District Name&nbsp;<sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></label>
+                                <select class="form-control" [class.is-invalid]="mandalForm.get('DistrictName').invalid && mandalForm.get('DistrictName').touched || 
+                                    mandalForm.get('DistrictName').pristine && hasError" formControlName="DistrictName">
+                                    <option>Select District Name</option>
+                                    <option *ngFor="let districts of getDistrictList">{{ districts?.district }}</option>
+                                        <span class="error" *ngIf="mandalForm.get('DistrictName').invalid && mandalForm.get('DistrictName').touched || 
+                                    mandalForm.get('DistrictName').pristine && hasError">Please Add District Name</span>
+                                </select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="add_mandal">
+                                <label>MANDAL NAME&nbsp;<sup><i class="fa fa-asterisk"
+                                            aria-hidden="true"></i></sup></label>
+                                <input [class.is-invalid]="mandalForm.get('mandal').invalid && mandalForm.get('mandal').touched || 
+                                mandalForm.get('mandal').pristine && hasError" type="text" class="form-control"
+                                    formControlName="mandal">
+
+                                <span class="error" *ngIf="mandalForm.get('mandal').invalid && mandalForm.get('mandal').touched || 
+                                 mandalForm.get('mandal').pristine && hasError">Please Add mandal Name</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 add_mandal_btn">
+                        <button type="submit" class="btn btn-primary" (click)="addingmandal()">Add Mandal</button>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- mandal edit Model -->
+<div class="modal fade" id="mandalEditModal" tabindex="-1" role="dialog" aria-labelledby="mandalEditModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="mandalEditModalLabel">Mandal Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editMandalForm">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>State Name
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <select [class.is-invalid]="editMandalForm.get('stName').invalid && editMandalForm.get('stName').touched || 
+              editMandalForm.get('stName').pristine && hasError" class="form-control" (change)="getDistrictName()"
+                  formControlName="stName">
+                  <!-- <option>Select State</option> -->
+                  <option *ngFor="let states of filteredAgencyList()">{{states.state}}</option>
+              </select>
+              <span class="error" *ngIf="editMandalForm.get('stName').invalid && editMandalForm.get('stName').touched || 
+               editMandalForm.get('stName').pristine && hasError">Please Add State
+                  Name</span>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>District Name
+                  <sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup>
+                </label>
+                <select class="form-control" [class.is-invalid]="editMandalForm.get('distName').invalid && editMandalForm.get('distName').touched || 
+                editMandalForm.get('distName').pristine && hasError" formControlName="distName">
+                <!-- <option>Select District Name</option> -->
+                <option *ngFor="let Districts of getDistrictList">{{ Districts?.district }}</option>
+                    <span class="error" *ngIf="editMandalForm.get('distName').invalid && editMandalForm.get('distName').touched || 
+                editMandalForm.get('distName').pristine && hasError">Please Add District Name</span>
+            </select>
+
+            </div>
+
+            
+            <div class="col-md-6">
+                <div class="add_mandal">
+                    <label>MANDAL NAME&nbsp;<sup><i class="fa fa-asterisk"
+                                aria-hidden="true"></i></sup></label>
+                    <input [class.is-invalid]="editMandalForm.get('mandalName').invalid && editMandalForm.get('mandalName').touched || 
+                    editMandalForm.get('mandalName').pristine && hasError" type="text" class="form-control"
+                        formControlName="mandalName">
+
+                    <span class="error" *ngIf="editMandalForm.get('mandalName').invalid && editMandalForm.get('mandalName').touched || 
+                     editMandalForm.get('mandalName').pristine && hasError">Please Add mandal Name</span>
+                </div>
+            </div>
+
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="updateMandal()">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

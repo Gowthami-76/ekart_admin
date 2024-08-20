@@ -1,0 +1,58 @@
+.card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-location   {
+    color: #ffff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 10px;
+    /* background-color: #ef8157; */
+    font-weight: 600;
+    font-size: 14px;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 35%, rgba(0,212,255,1) 100%);
+}
+.btn-red{
+    background-color: #f90d0dc7;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+table p {
+    margin-bottom: 0px;
+}
+
+#CreateLocationModel .create_location .location_details {
+    margin-bottom: 15px
+}
+
+#CreateLocationModel .create_location .location_details label {
+    font-weight: bold;
+    color: #000;
+    padding-bottom: 15px;
+}
+
+#CreateLocationModel .create_location .location_details label i {
+    color: red;
+}
+
+.error {
+    color: red;
+    margin : 10px 0px;
+    font-size: 13px;
+}
+
+tbody tr td {
+    text-align: center;
+}
+
+.table .text-primary th{
+    text-align: center;
+}

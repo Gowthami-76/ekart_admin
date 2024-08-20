@@ -1,0 +1,160 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">
+                    Locations
+                </h4>
+                <div class="create_button">
+                    <button type="button" class="add-location" (click)="addLocation()">
+                        Add Location
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>
+                                S.No
+                            </th>
+                            <th>
+                                Village
+                            </th>
+                            <th>
+                                Mandal
+                            </th>
+                            <th>
+                                District
+                            </th>
+
+                            <th>
+                                State
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let list of LocationsList; let i = index">
+                                <td>
+                                    <p>{{ i + 1 }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ list?.village }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ list?.mandal }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ list?.district }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ list?.state }}</p>
+                                </td>
+                                <td>
+                                    <button class="btn-red" type="button">
+                                        <i class="fas fa-trash" (click)="deleteLocation(list)"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CreateLocationModel" tabindex="-1" role="dialog" aria-labelledby="CreateLocationModelLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="CreateLocationModelLabel">Create Location</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section class="create_location" [formGroup]="createLocation">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <div class="location_details">
+                                <label>Village Name&nbsp;<sup>
+                                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                                    </sup></label>
+
+                                <input [class.is-invalid]="
+                                (createLocation.get('villageName').invalid && createLocation.get('villageName').touched) || 
+                                (createLocation.get('villageName').pristine && hasError)" type="text"
+                                    class="form-control" placeholder="Enter Village Name" formControlName="villageName">
+
+                                <span class="error" *ngIf="(createLocation.get('villageName').invalid && createLocation.get('villageName').touched) || 
+                                (createLocation.get('villageName').pristine && hasError)">Enter Village Name</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <div class="location_details">
+                                <label>Mandal Name&nbsp;<sup>
+                                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                                    </sup></label>
+
+                                <input [class.is-invalid]="
+                                (createLocation.get('mandalName').invalid && createLocation.get('mandalName').touched) || 
+                                (createLocation.get('mandalName').pristine && hasError)" type="text"
+                                    class="form-control" placeholder="Enter Mandal Name" formControlName="mandalName">
+
+                                <span class="error" *ngIf="(createLocation.get('mandalName').invalid && createLocation.get('mandalName').touched) || 
+                                (createLocation.get('mandalName').pristine && hasError)">Enter Mandal Name</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <div class="location_details">
+                                <label>District Name&nbsp;<sup>
+                                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                                    </sup></label>
+
+                                <input [class.is-invalid]="
+                                (createLocation.get('districtName').invalid && createLocation.get('districtName').touched) || 
+                                (createLocation.get('districtName').pristine && hasError)" type="text"
+                                    class="form-control" placeholder="Enter District Name"
+                                    formControlName="districtName">
+
+                                <span class="error" *ngIf="(createLocation.get('districtName').invalid && createLocation.get('districtName').touched) || 
+                                    (createLocation.get('districtName').pristine && hasError)">Enter District
+                                    Name</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <div class="location_details">
+                                <label>State Name&nbsp;<sup>
+                                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                                    </sup></label>
+
+                                <input type="text" [class.is-invalid]="
+                                (createLocation.get('stateName').invalid && createLocation.get('stateName').touched) || 
+                                (createLocation.get('stateName').pristine && hasError)" class="form-control"
+                                    placeholder="Enter State Name" formControlName="stateName">
+                                <span class="error" *ngIf="(createLocation.get('stateName').invalid && createLocation.get('stateName').touched) || 
+                                (createLocation.get('stateName').pristine && hasError)">Enter State Name</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="createStore">
+                            <button type="submit" class="btn create_location" (click)="LocationAdd()">Create
+                                Location</button>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

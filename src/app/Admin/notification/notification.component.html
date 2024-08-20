@@ -1,0 +1,319 @@
+<section class="brands_Upload_section">
+  <div class="card">
+    <div class="card-body">
+      <div class="brands_header animated zoomIn">
+        <h4 class="card-title">Notifications Details</h4>
+        <!-- <button
+            type="submit"
+            class="btn new_brand"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >
+            Upload Brand
+          </button> -->
+      </div>
+
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss active"
+            id="pills-home-tab"
+            data-toggle="pill"
+            data-target="#pills-home"
+            type="button"
+            role="tab"
+            aria-controls="pills-home"
+            aria-selected="true"
+          >
+            Create Notifications
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss"
+            id="pills-profile-tab"
+            data-toggle="pill"
+            data-target="#pills-profile"
+            type="button"
+            role="tab"
+            aria-controls="pills-profile"
+            aria-selected="false"
+          >
+            Sent Notifications
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content tab-contentss" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-home"
+          role="tabpanel"
+          aria-labelledby="pills-home-tab"
+        >
+          <div class="brand_details animated zoomIn container">
+            <!-- <table
+                id="myTable"
+                class="table table-striped border color-table inverse-table"
+              >
+                <thead>
+                  <tr>
+                    <th>S.NO</th>
+                    <th>Vehicle Name</th>
+                    <th>Vendor Name</th>
+                    <th>Shop Name</th>
+                    <th>Contact No</th>
+                    <th>Rating</th>
+                    <th>Trust Rating</th>
+                <th>Verification Rating</th>
+                    <th>Model Name</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+  
+                <tbody>
+                  <tr>
+                    <td></td>
+                    <td>
+                  <img src="{{ data.vehicleImage }}" height="100">
+                </td>
+                    <td>Lucky</td>
+                    <td>lucky Shops</td>
+                    <td>9999999999</td>
+                    <td></td>
+                    <td>{{ data?.trustRating }}</td>
+                <td>{{ data?.vendorVerficationRating }}</td> 
+                     <td>{{ data?.brand }}</td>
+                    <td class="table_actions">
+                      <button
+                        class="btn-green"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#RatingviewModal"
+                        
+                      >
+                        <i class="fas fa-eye"></i>
+                      </button>
+                      <button class="btn-blue" type="button">
+                  <i class="fas fa-pen"></i>
+                  </button>
+                      <button
+                        class="btn-red"
+                        type="button"
+                        
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table> -->
+           <form [formGroup]="createnotification">  
+            <div class="row">
+
+              <!-- <div class="col-md-6">
+                <label class="label-field">Select User</label>
+                <select name="plan" class="input-field">
+                  <option value="Select User" selected>Select User</option>
+
+                  <option value="free">Raj</option>
+                  <option value="starter">Ravi</option>
+                  <option value="professional">Ramesh</option>
+                  <option value="corporate">Rahul</option>
+                </select>
+              </div> -->
+
+              
+              <div class="col-md-6">
+                <div class="custome-select">
+                  <label class="label-field">Select User</label>
+
+                  <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="userStatusDetails" (click)="userStatus()" formControlName="selectLocation" (onSelect)="userSelect()" (onDeSelect)="userSelect()">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-6">
+                <div class="custome-select">
+                  <label class="label-field">Select User</label>
+
+                  <ng-multiselect-dropdown [settings]="dropdownSettingss" [data]="listuser" formControlName="selectLocation" (onSelect)="userSelect()" (onDeSelect)="userSelect()">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div> -->
+
+              <!-- <div class="col-md-6">
+                <div class="custome-select">
+                  <label>Time</label>
+                  <input type="date" placeholder="choose date" />
+                </div>
+              </div> -->
+              
+              <div class="col-md-6">
+                <div class="custome-select">
+                <label class="label-field">Message</label>
+                
+                <input type="text" placeholder="Enter Message" class="form-control" formControlName="msg" />
+              </div>
+              </div>
+
+              <!-- <div class="col-md-6">
+                <div class="custome-select">
+                    <label class="label-field">Select Location</label>
+                    <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="listuser" formControlName="selectLocation">
+                    </ng-multiselect-dropdown>
+                </div>
+            </div> -->
+
+              <!-- <div class="col-md-6">
+                <label class="label-field">Select Date</label>
+                
+                <input [class.is-invalid]="createnotification.get('date').invalid && createnotification.get('date').touched || 
+                                           createnotification.get('date').pristine && hasError" type="date" placeholder="select date" class="form-control"
+                                    formControlName="date">
+
+                                <span class="error" *ngIf="createnotification.get('date').invalid && createnotification.get('date').touched || 
+                                                           createnotification.get('date').pristine && hasError">Please select the date</span>
+              </div> -->
+            </div>
+
+<div class="new_brands">
+    <button
+    type="submit"
+    class="btn new_brand" (click)="sentNotification()"
+  >
+    Create
+  </button>
+</div>
+</form>
+
+          </div>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="pills-profile"
+          role="tabpanel"
+          aria-labelledby="pills-profile-tab"
+        >
+          <div class="brand_details animated zoomIn">
+            <table
+              id="myTable"
+              class="table table-striped border color-table inverse-table"
+            >
+              <thead>
+                <tr>
+                  <th>S.NO</th>
+                  <!-- <th>Vehicle Name</th> -->
+                  <th>User Name</th>
+                  <th>Message</th>
+                  <th>Date</th>
+                  <th>Time</th>
+
+                  <!-- <th>Rating</th> -->
+                  <!-- <th>Trust Rating</th>
+                <th>Verification Rating</th> -->
+                  <!-- <th>Model Name</th> -->
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let notifyList of notifyDetails; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <!-- <td>
+                  <img src="{{ data.vehicleImage }}" height="100">
+                </td> -->
+                  <td>
+                    <ul class="notify-ul">
+                    <li *ngFor="let notify of notifyList.userId">
+                    <span>{{notify?.firstName}} {{notify?.lastName}}</span>
+                    </li>
+                </ul>
+                  </td>
+                  <td>{{notifyList?.body}}</td>
+                  <td>{{notifyList?.date}}</td>
+                  <td>{{notifyList?.time}}</td>
+
+                  <!-- <td></td> -->
+                  <!-- <td>{{ data?.trustRating }}</td>
+                <td>{{ data?.vendorVerficationRating }}</td> -->
+                  <!-- <td>{{ data?.brand }}</td> -->
+                  <td class="table_actions">
+                    <button
+                      class="btn-green"
+                      type="button"
+(click)="onView(notifyList)"
+                    >
+                      <i class="fa fa-eye"></i>
+                    </button>
+                    <!--<button class="btn-blue" type="button">
+                  <i class="fas fa-pen"></i>
+                  </button>-->
+                    <button class="btn-red" type="button" (click)="onDelete(notifyList)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- View  -->
+<div class="modal fade" id="notifyViewModal" tabindex="-1" role="dialog" aria-labelledby="notifyViewModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notifyViewModalLabel">Notification Details View</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section>
+                    <div class="view_notification">
+                        <div class="row" >
+                            <div class="col-md-6">
+                                <div class="language_name" >
+                                    <label>User Name:</label>
+                                    <ul class="notify-ul" *ngFor="let notifyView of notificationView?.userId">
+                                      <li>
+                                      <span>{{notifyView?.firstName}} {{notifyView?.lastName}}</span>
+                                      </li>
+                                     </ul>
+                                    <!-- <p>{{ notificationView?.firstName }} {{ notificationView?.lastName }}</p> -->
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="language_name">
+                                    <label>Message:</label>
+                                    <p>{{notificationView?.body}}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                              <div class="language_name">
+                                  <label>Date</label>
+                                  <p>{{notificationView?.date}}</p>
+                              </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="language_name">
+                                <label>Time</label>
+                                <p>{{notificationView?.time}}</p>
+                            </div>
+                        </div>
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

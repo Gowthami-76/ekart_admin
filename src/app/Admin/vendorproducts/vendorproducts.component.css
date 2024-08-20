@@ -1,0 +1,109 @@
+tbody tr td {
+    text-align: center;
+}
+
+.table .text-primary th{
+    text-align: center;
+}
+.card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    .add-product{
+        color: #ffff;
+        border: none;
+        padding: 10px 10px;
+        border-radius: 10px;
+        /* background-color: #ef8157; */
+        font-weight: 600;
+        font-size: 14px;
+        background: rgb(2,0,36);
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 35%, rgba(0,212,255,1) 100%);
+    }
+.btn-green{
+    background-color: #6ac16a;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+.btn-blue{
+    background-color: #2ab0df;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-red{
+    background-color: #f90d0dc7;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+span.error {
+    color: #dc3545;
+    font-size: 13px;
+  }
+
+label i {
+    color: #de0505;
+    font-size: 7px;
+}
+.UserImage{
+    width: 75px;
+    height: 60px;
+}
+
+.addimage {
+    height: 50px;
+    padding: 7px;
+    font-size: 15px;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    color: black;
+    position: relative;
+    margin-top: 10px;
+    background: #005db2;
+    border: 1px solid #005db2;
+}
+
+.addimage span {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.addimage input {
+    opacity: 0;
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    text-align: center;
+    height: 44px;
+    top: -15px;
+}
+
+.image_specs img {
+    height: 150px;
+    width: 150px;
+}
+
+.User_detailss label{
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 0px;
+}
+
+.User_detailss img{
+width: 100px;
+}

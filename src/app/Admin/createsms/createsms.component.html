@@ -1,0 +1,224 @@
+<section class="brands_Upload_section">
+  <div class="card">
+    <div class="card-body">
+      <div class="brands_header animated zoomIn">
+        <h4 class="card-title">Create SMS Details</h4>
+        <!-- <button
+              type="submit"
+              class="btn new_brand"
+              data-toggle="modal"
+              data-target="#exampleModal"
+            >
+              Upload Brand
+            </button> -->
+      </div>
+
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss active"
+            id="pills-home-tab"
+            data-toggle="pill"
+            data-target="#pills-home"
+            type="button"
+            role="tab"
+            aria-controls="pills-home"
+            aria-selected="true"
+          >
+            Create SMS
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link linkss"
+            id="pills-profile-tab"
+            data-toggle="pill"
+            data-target="#pills-profile"
+            type="button"
+            role="tab"
+            aria-controls="pills-profile"
+            aria-selected="false"
+          >
+            Sent SMS
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-home"
+          role="tabpanel"
+          aria-labelledby="pills-home-tab"
+        >
+          <div class="brand_details table-responsive animated zoomIn container">
+            <!-- <table
+                  id="myTable"
+                  class="table table-striped border color-table inverse-table"
+                >
+                  <thead>
+                    <tr>
+                      <th>S.NO</th>
+                      <th>Vehicle Name</th>
+                      <th>Vendor Name</th>
+                      <th>Shop Name</th>
+                      <th>Contact No</th>
+                      <th>Rating</th>
+                      <th>Trust Rating</th>
+                  <th>Verification Rating</th>
+                      <th>Model Name</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+    
+                  <tbody>
+                    <tr>
+                      <td></td>
+                      <td>
+                    <img src="{{ data.vehicleImage }}" height="100">
+                  </td>
+                      <td>Lucky</td>
+                      <td>lucky Shops</td>
+                      <td>9999999999</td>
+                      <td></td>
+                      <td>{{ data?.trustRating }}</td>
+                  <td>{{ data?.vendorVerficationRating }}</td> 
+                       <td>{{ data?.brand }}</td>
+                      <td class="table_actions">
+                        <button
+                          class="btn-green"
+                          type="button"
+                          data-toggle="modal"
+                          data-target="#RatingviewModal"
+                          
+                        >
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn-blue" type="button">
+                    <i class="fas fa-pen"></i>
+                    </button>
+                        <button
+                          class="btn-red"
+                          type="button"
+                          
+                        >
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table> -->
+            <form [formGroup]="createSms">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="custome-select">
+                    <label class="label-field">Select User</label>
+
+                    <ng-multiselect-dropdown
+                      [settings]="dropdownSettings"
+                      [data]="userStatusDetails"
+                      (click)="userStatus()"
+                      formControlName="selectLocation"
+                    >
+                    </ng-multiselect-dropdown>
+                  </div>
+                </div>
+
+                <!-- <div class="col-md-6">
+                  <div class="custome-select">
+                    <label class="label-field">Mobile</label>
+
+                    <input
+                      type="text"
+                      placeholder="Enter Mobile No"
+                      class="form-control"
+                      formControlName="mobileNo"
+                    />
+                  </div>
+                </div> -->
+
+                <div class="col-md-6">
+                  <div class="custome-select">
+                    <label class="label-field">Message</label>
+
+                    <input
+                      type="text"
+                      placeholder="Enter Message"
+                      class="form-control"
+                      formControlName="msg"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="new_brands">
+                <button type="submit" class="btn new_brand" (click)="sentSms()">
+                  Create
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div
+          class="tab-pane fade"
+          id="pills-profile"
+          role="tabpanel"
+          aria-labelledby="pills-profile-tab"
+        >
+          <div class="brand_details table-responsive animated zoomIn">
+            <table
+              id="myTable"
+              class="table table-striped border color-table inverse-table"
+            >
+              <thead>
+                <tr>
+                  <th>S.NO</th>
+                  <!-- <th>Vehicle Name</th> -->
+                  <th>User Name</th>
+                  <th>Mobile No</th>
+                  <th>Message</th>
+                  <!-- <th>Rating</th> -->
+                  <!-- <th>Trust Rating</th>
+                  <th>Verification Rating</th> -->
+                  <!-- <th>Model Name</th> -->
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let smsDetails of createSmsDetails; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <!-- <td>
+                    <img src="{{ data.vehicleImage }}" height="100">
+                  </td> -->
+                  <td>{{smsDetails?.userId[0]?.firstName}} {{smsDetails?.userId[0]?.lastName}}</td>
+                  <td>{{smsDetails?.userId[0]?.mobileNum}}</td>
+                  <td>{{smsDetails?.body}}</td>
+                  <!-- <td></td> -->
+                  <!-- <td>{{ data?.trustRating }}</td>
+                  <td>{{ data?.vendorVerficationRating }}</td> -->
+                  <!-- <td>{{ data?.brand }}</td> -->
+                  <td class="table_actions">
+                    <button
+                      class="btn-green"
+                      type="button"
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                    >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <!--<button class="btn-blue" type="button">
+                    <i class="fas fa-pen"></i>
+                    </button>-->
+                    <button class="btn-red" type="button">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

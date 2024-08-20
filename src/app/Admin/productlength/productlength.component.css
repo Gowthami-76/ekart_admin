@@ -1,0 +1,66 @@
+.card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.productsize{
+    color: #ffff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 10px;
+    /* background-color: #ef8157; */
+    font-weight: 600;
+    font-size: 14px;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,212,255,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+tbody tr td {
+    text-align: center;
+}
+
+.table .text-primary th{
+    text-align: center;
+}
+.form-group label{
+    font-size: 15px;
+}
+label i {
+    color: #de0505;
+    font-size: 7px;
+}
+
+#exampleModal .create_length {
+    text-align: center;
+}
+
+#exampleModal .create_length button {
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg,rgba(2,0,36,1) 0%,rgba(0,212,255,1) 35%,rgba(0,212,255,1) 100%);
+}
+
+.btn-red{
+    background-color: #f90d0dc7;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-blue{
+    background-color: #2ab0df;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}

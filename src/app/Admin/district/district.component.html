@@ -1,0 +1,176 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">DISTRICT LIST</h4>
+            <div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Add District
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class=" text-primary">
+                        <th>
+                            S.No
+                        </th>
+                        <th>
+                            State Name
+                        </th>
+                        <th>
+                            District Name
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let DistrictsList of getStatesList; let i = index">
+                            <td>
+                                {{ i + 1 }}
+                            </td>
+                            <td>
+                                {{ DistrictsList?.state }}
+                            </td>
+                            <td>
+                                {{ DistrictsList?.district }}
+                            </td>
+                            <td>
+                                <!-- <button class="btn-green" type="button">
+                                  <i class="fas fa-eye"></i>
+                                </button> -->
+                                <button class="btn-blue" type="button" (click)="DistrictEdit(DistrictsList)">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button class="btn-red" type="button" (click)="DistrictDelete(DistrictsList)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add District</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <section class="districtaddModal" [formGroup]="districtaddModal">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="custome-select">
+                                <label>State Name&nbsp;<sup><i class="fa fa-asterisk"
+                                            aria-hidden="true"></i></sup></label>
+                                <select [class.is-invalid]="districtaddModal.get('selectState').invalid && districtaddModal.get('selectState').touched || 
+                                districtaddModal.get('selectState').pristine && hasError" class="form-control"
+                                    formControlName="selectState">
+                                    <option>SelectState</option>
+                                    <option *ngFor="let states of filteredAgencyList()">{{states.state}}</option>
+                                </select>
+                                <span class="error" *ngIf="districtaddModal.get('selectState').invalid && districtaddModal.get('selectState').touched || 
+                                 districtaddModal.get('selectState').pristine && hasError">Please Add district
+                                    Name</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="add_district">
+                                <label>DISTRICT NAME&nbsp;<sup><i class="fa fa-asterisk"
+                                            aria-hidden="true"></i></sup></label>
+                                <input [class.is-invalid]="districtaddModal.get('district').invalid && districtaddModal.get('district').touched || 
+                                districtaddModal.get('district').pristine && hasError" type="text" class="form-control"
+                                    formControlName="district">
+
+                                <span class="error" *ngIf="districtaddModal.get('district').invalid && districtaddModal.get('district').touched || 
+                                 districtaddModal.get('district').pristine && hasError">Please Add district Name</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 add_district_btn">
+                        <button type="submit" class="btn btn-primary" (click)="addingDistrict()">Add District</button>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- district edit Model -->
+<div class="modal fade" id="districtEditModal" tabindex="-1" role="dialog" aria-labelledby="districtEditModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="districtEditModalLabel">State Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="editDistrictForm">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>State Name
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <select [class.is-invalid]="editDistrictForm.get('stateName').invalid && editDistrictForm.get('stateName').touched || 
+              editDistrictForm.get('stateName').pristine && hasError" class="form-control"
+                  formControlName="stateName">
+                  <!-- <option>Select State</option> -->
+                  <option *ngFor="let states of filteredAgencyList()">{{states.state}}</option>
+              </select>
+              <span class="error" *ngIf="editDistrictForm.get('stateName').invalid && editDistrictForm.get('stateName').touched || 
+               editDistrictForm.get('stateName').pristine && hasError">Please Add district
+                  Name</span>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>District Name
+                  <sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup>
+                </label>
+                <input type="text" placeholder="" class="form-control" formControlName="distName" [class.is-invalid]="
+                    (editDistrictForm.get('distName')?.invalid &&
+                      editDistrictForm.get('distName')?.touched) ||
+                    (editDistrictForm.get('distName')?.pristine && hasError)
+                  " />
+  
+                <span class="error" *ngIf="
+                    (editDistrictForm.get('distName')?.invalid &&
+                      editDistrictForm.get('distName')?.touched) ||
+                    (editDistrictForm.get('distName')?.pristine && hasError)
+                  ">
+                  Please enter your District Name
+                </span>
+              </div>
+
+        </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="updateDistrict()">Update District</button>
+      </div>
+    </div>
+  </div>
+</div>

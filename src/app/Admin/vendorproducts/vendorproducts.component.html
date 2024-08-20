@@ -1,0 +1,697 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Vendor Products Details</h4>
+        <!-- <div class="create_button">
+                    <button type="btn" class="add-product">Add Product</button>
+                    <button type="button" class="add-product" data-toggle="modal" data-target="#exampleModal">
+                      Add Vendor
+                    </button>
+                </div> -->
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <th>S.No</th>
+              <th>Vendor Name</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let vendorProdList of vendorProductList; let i = index">
+
+                <!-- | paginate : {itemsPerPage:5,currentPage:s} -->
+
+                <td>
+                  {{ i + 1 }}
+                </td>
+                <td>
+                  <p>
+                    {{ vendorProdList?.vendorName }}
+                  </p>
+                </td>
+                <td>
+                  <p>{{ vendorProdList?.productName }}</p>
+                </td>
+                <td>
+                  <p>{{ vendorProdList?.price }}</p>
+                </td>
+                <td>
+                  <p>{{ vendorProdList?.quantity }}</p>
+                </td>
+
+                <td>
+                  <button
+                    class="btn-green"
+                    type="button"
+                    (click)="onView(vendorProdList)"
+                  >
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <!-- <button class="btn-blue" type="button" (click)="userEdit(userDetails)">
+                                      <i class="fas fa-pen"></i>
+                                    </button>
+                                    <button class="btn-red" type="button" (click)="Delete(userDetails)">
+                                      <i class="fas fa-trash"></i>
+                                    </button> -->
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+          <!-- <pagination-controls (pageChange)="s=$event"></pagination-controls> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Vendor Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="vendorForm">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label>First Name
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input type="text" placeholder="" class="form-control" formControlName="vendorFirstName" [class.is-invalid]="
+                  (vendorForm.get('vendorFirstName')?.invalid &&
+                    vendorForm.get('vendorFirstName')?.touched) ||
+                  (vendorForm.get('vendorFirstName')?.pristine && hasError)
+                " />
+
+              <span class="error" *ngIf="
+                  (vendorForm.get('vendorFirstName')?.invalid &&
+                    vendorForm.get('vendorFirstName')?.touched) ||
+                  (vendorForm.get('vendorFirstName')?.pristine && hasError)
+                ">
+                Please enter your Valid First Name
+              </span>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>Last Name
+                  <sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup>
+                </label>
+                <input type="text" placeholder="" class="form-control" formControlName="vendorLastName" [class.is-invalid]="
+                    (vendorForm.get('vendorLastName')?.invalid &&
+                      vendorForm.get('vendorLastName')?.touched) ||
+                    (vendorForm.get('vendorLastName')?.pristine && hasError)
+                  " />
+  
+                <span class="error" *ngIf="
+                    (vendorForm.get('vendorLastName')?.invalid &&
+                      vendorForm.get('vendorLastName')?.touched) ||
+                    (vendorForm.get('vendorLastName')?.pristine && hasError)
+                  ">
+                  Please enter your Valid Vendor Last Name
+                </span>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>Mobile No
+                  <sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup>
+                </label>
+                <input type="text" placeholder="" class="form-control" formControlName="mobileNum" [class.is-invalid]="
+                    (vendorForm.get('mobileNum')?.invalid &&
+                      vendorForm.get('mobileNum')?.touched) ||
+                    (vendorForm.get('mobileNum')?.pristine && hasError)
+                  " />
+  
+                <span class="error" *ngIf="
+                    (vendorForm.get('mobileNum')?.invalid &&
+                      vendorForm.get('mobileNum')?.touched) ||
+                    (vendorForm.get('mobileNum')?.pristine && hasError)
+                  ">
+                  Please enter your Valid Mobile Number
+                </span>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>E-Mail Id
+                  <sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup>
+                </label>
+                <input type="text" placeholder="" class="form-control" formControlName="emailId" [class.is-invalid]="
+                    (vendorForm.get('emailId')?.invalid &&
+                      vendorForm.get('emailId')?.touched) ||
+                    (vendorForm.get('emailId')?.pristine && hasError)
+                  " />
+  
+                <span class="error" *ngIf="
+                    (vendorForm.get('emailId')?.invalid &&
+                      vendorForm.get('emailId')?.touched) ||
+                    (vendorForm.get('emailId')?.pristine && hasError)
+                  ">
+                  Please enter your Valid E-Mail Id
+                </span>
+            </div>
+
+            <div class="col-md-6 form-group">
+                <label>Alternative Mobile No
+                  <sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup>
+                </label>
+                <input type="text" placeholder="" class="form-control" formControlName="altMobileNo" [class.is-invalid]="
+                    (vendorForm.get('altMobileNo')?.invalid &&
+                      vendorForm.get('altMobileNo')?.touched) ||
+                    (vendorForm.get('altMobileNo')?.pristine && hasError)
+                  " />
+  
+                <span class="error" *ngIf="
+                    (vendorForm.get('altMobileNo')?.invalid &&
+                      vendorForm.get('altMobileNo')?.touched) ||
+                    (vendorForm.get('altMobileNo')?.pristine && hasError)
+                  ">
+                  Please enter your Valid Alternative Mobile Name
+                </span>
+            </div>
+
+
+            <div class="col-md-6 form-group">
+                <label>Entity Name
+                  <sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup>
+                </label>
+                <input type="text" placeholder="" class="form-control" formControlName="entityName" [class.is-invalid]="
+                    (vendorForm.get('entityName')?.invalid &&
+                      vendorForm.get('entityName')?.touched) ||
+                    (vendorForm.get('entityName')?.pristine && hasError)
+                  " />
+  
+                <span class="error" *ngIf="
+                    (vendorForm.get('entityName')?.invalid &&
+                      vendorForm.get('entityName')?.touched) ||
+                    (vendorForm.get('entityName')?.pristine && hasError)
+                  ">
+                  Please enter your Valid Entity Name
+                </span>
+            </div>
+
+
+
+            <div class="col-md-6 form-group">
+              <label>Location
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input type="text" placeholder="" class="form-control" formControlName="vendorLocation" [class.is-invalid]="
+                  (vendorForm.get('vendorLocation')?.invalid &&
+                    vendorForm.get('vendorLocation')?.touched) ||
+                  (vendorForm.get('vendorLocation')?.pristine && hasError)" />
+              <span class="error" *ngIf="
+                  (vendorForm.get('vendorLocation')?.invalid &&
+                    vendorForm.get('vendorLocation')?.touched) ||
+                  (vendorForm.get('vendorLocation')?.pristine && hasError)
+                ">
+                Please enter your valid product size
+              </span>
+            </div>
+            <div class="col-md-6 form-group">
+              <label>Language
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input [class.is-invalid]="
+                  (vendorForm.get('language')?.invalid &&
+                    vendorForm.get('language')?.touched) ||
+                  (vendorForm.get('language')?.pristine && hasError)
+                " type="text" placeholder="" class="form-control" formControlName="language" />
+              <span class="error" *ngIf="
+                  (vendorForm.get('language')?.invalid &&
+                    vendorForm.get('language')?.touched) ||
+                  (vendorForm.get('language')?.pristine && hasError)
+                ">
+                Please enter your valid Product Quantity
+              </span>
+            </div>
+
+            <div class="col-md-6">
+              <div class="specs image_specs">
+                <span class="closewrap">
+
+                  <button type="button" class="btn btn-primary addimage">
+                    <span>
+                      <i class="fa fa-plus-circle"></i>
+                      <p>ADD VENDOR IMAGE</p>
+                    </span>
+                    <input type="file" (change)="selectFiles($event)" multiple class="form-control"
+                      id="vendorImage" formControlName="vendorImage"
+                      [class.is-invalid]="(vendorForm.get('vendorImage')?.invalid && 
+                      vendorForm.get('vendorImage')?.touched) ||
+                      (vendorForm.get('vendorImage')?.pristine && hasError)
+                      " />
+                      <span class="error" *ngIf="
+                      (vendorForm.get('vendorImage')?.invalid &&
+                      vendorForm.get('vendorImage')?.touched) ||
+                      (vendorForm.get('vendorImage')?.pristine && hasError)
+                      "></span>
+                  </button>
+
+                  <div *ngFor="let url of urls; let index = index" class="blockspace">
+                    <img [src]="url" alt="" width="100" height="100" />
+
+                    <i class="fas fa-times" aria-hidden="true" (click)="removeSelectedFile(index)"
+                      *ngIf="RemoveImage"></i>
+                  </div>
+                </span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="specs image_specs">
+                  <span class="closewrap">
+  
+                    <button type="button" class="btn btn-primary addimage">
+                      <span>
+                        <i class="fa fa-plus-circle"></i>
+                        <p>ADD ENTITY IMAGE</p>
+                      </span>
+                      <input type="file" (change)="selectFiles2($event)" multiple class="form-control"
+                        id="entityImage" formControlName="entityImage"
+                        [class.is-invalid]="(vendorForm.get('entityImage')?.invalid && 
+                      vendorForm.get('entityImage')?.touched) ||
+                      (vendorForm.get('entityImage')?.pristine && hasError)
+                      " />
+                      <span class="error" *ngIf="
+                      (vendorForm.get('entityImage')?.invalid &&
+                      vendorForm.get('entityImage')?.touched) ||
+                      (vendorForm.get('entityImage')?.pristine && hasError)
+                      "></span>
+                    </button>
+  
+                    <div *ngFor="let url of urls1; let index = index" class="blockspace">
+                      <img [src]="url" alt="" width="100" height="100" />
+  
+                      <i class="fas fa-times" aria-hidden="true" (click)="removeSelectedFile1(index)"
+                        *ngIf="RemoveImage1"></i>
+                    </div>
+                  </span>
+                </div>
+              </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="addVendor()">Add Product</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- view Modal -->
+<div
+  class="modal fade"
+  id="ViewProductModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ViewProductModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ViewProductModalLabel">Vendor Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section class="detailsView">
+          <div class="userdetailsView">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Vendor Name :</label>
+                  <p>{{ viewVendorProduct?.vendorName }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Product Name :</label>
+                  <p>{{ viewVendorProduct?.productName }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Price :</label>
+                  <p>{{ viewVendorProduct?.price }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Quantity :</label>
+                  <p>{{ viewVendorProduct?.quantity }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Size :</label>
+                  <p>{{ viewVendorProduct?.size }}</p>
+                </div>
+              </div>
+              <!-- <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Entity Name :</label>
+                  <p>{{ UserDetailsView?.entityName }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Location :</label>
+                  <p>{{ UserDetailsView?.availableLocation }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Language :</label>
+                  <p>{{ UserDetailsView?.chooseLanguage }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>User Image :</label>
+                  <p>
+                    <img
+                      src="{{ BaseUrl }}{{ UserDetailsView?.userImage }}"
+                      class="viewmodelimg"
+                    />
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Entity Image :</label>
+                  <p>
+                    <img
+                      src="{{ BaseUrl }}{{ UserDetailsView?.entityImage }}"
+                      class="viewmodelimg"
+                    />
+                  </p>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit Modal -->
+<!-- <div class="modal fade" id="EditVendorModal" tabindex="-1" role="dialog" aria-labelledby="EditVendorModal"
+aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="EditVendorModal">Vendor Info</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editvendorForm">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label>First Name
+              <sup>
+                <i class="fa fa-asterisk" aria-hidden="true"></i>
+              </sup>
+            </label>
+            <input type="text" placeholder="" class="form-control" formControlName="vFirstName" [class.is-invalid]="
+                (editvendorForm.get('vFirstName')?.invalid &&
+                  editvendorForm.get('vFirstName')?.touched) ||
+                (editvendorForm.get('vFirstName')?.pristine && hasError)
+              " />
+
+            <span class="error" *ngIf="
+                (editvendorForm.get('vFirstName')?.invalid &&
+                  editvendorForm.get('vFirstName')?.touched) ||
+                (editvendorForm.get('vFirstName')?.pristine && hasError)
+              ">
+              Please enter your Valid First Name
+            </span>
+          </div>
+
+          <div class="col-md-6 form-group">
+              <label>Last Name
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input type="text" placeholder="" class="form-control" formControlName="vLastName" [class.is-invalid]="
+                  (editvendorForm.get('vLastName')?.invalid &&
+                    editvendorForm.get('vLastName')?.touched) ||
+                  (editvendorForm.get('vLastName')?.pristine && hasError)
+                " />
+
+              <span class="error" *ngIf="
+                  (editvendorForm.get('vLastName')?.invalid &&
+                    editvendorForm.get('vLastName')?.touched) ||
+                  (editvendorForm.get('vLastName')?.pristine && hasError)
+                ">
+                Please enter your Valid Vendor Last Name
+              </span>
+          </div>
+
+          <div class="col-md-6 form-group">
+              <label>Mobile No
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input type="text" placeholder="" class="form-control" formControlName="vmobileNum" [class.is-invalid]="
+                  (editvendorForm.get('vmobileNum')?.invalid &&
+                    editvendorForm.get('vmobileNum')?.touched) ||
+                  (editvendorForm.get('vmobileNum')?.pristine && hasError)
+                " />
+
+              <span class="error" *ngIf="
+                  (editvendorForm.get('vmobileNum')?.invalid &&
+                    editvendorForm.get('vmobileNum')?.touched) ||
+                  (editvendorForm.get('vmobileNum')?.pristine && hasError)
+                ">
+                Please enter your Valid Mobile Number
+              </span>
+          </div>
+
+          <div class="col-md-6 form-group">
+              <label>E-Mail Id
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input type="text" placeholder="" class="form-control" formControlName="vemailId" [class.is-invalid]="
+                  (editvendorForm.get('vemailId')?.invalid &&
+                    editvendorForm.get('vemailId')?.touched) ||
+                  (editvendorForm.get('vemailId')?.pristine && hasError)
+                " />
+
+              <span class="error" *ngIf="
+                  (editvendorForm.get('vemailId')?.invalid &&
+                    editvendorForm.get('vemailId')?.touched) ||
+                  (editvendorForm.get('vemailId')?.pristine && hasError)
+                ">
+                Please enter your Valid E-Mail Id
+              </span>
+          </div>
+
+          <div class="col-md-6 form-group">
+              <label>Alternative Mobile No
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input type="text" placeholder="" class="form-control" formControlName="valtMobileNo" [class.is-invalid]="
+                  (editvendorForm.get('valtMobileNo')?.invalid &&
+                    editvendorForm.get('valtMobileNo')?.touched) ||
+                  (editvendorForm.get('valtMobileNo')?.pristine && hasError)
+                " />
+
+              <span class="error" *ngIf="
+                  (editvendorForm.get('valtMobileNo')?.invalid &&
+                    editvendorForm.get('valtMobileNo')?.touched) ||
+                  (editvendorForm.get('valtMobileNo')?.pristine && hasError)
+                ">
+                Please enter your Valid Alternative Mobile Name
+              </span>
+          </div>
+          <div class="col-md-6 form-group">
+              <label>Entity Name
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input type="text" placeholder="" class="form-control" formControlName="ventityName" [class.is-invalid]="
+                  (editvendorForm.get('ventityName')?.invalid &&
+                    editvendorForm.get('ventityName')?.touched) ||
+                  (editvendorForm.get('ventityName')?.pristine && hasError)
+                " />
+
+              <span class="error" *ngIf="
+                  (editvendorForm.get('ventityName')?.invalid &&
+                    editvendorForm.get('ventityName')?.touched) ||
+                  (editvendorForm.get('ventityName')?.pristine && hasError)
+                ">
+                Please enter your Valid Entity Name
+              </span>
+          </div>
+
+
+
+          <div class="col-md-6 form-group">
+            <label>Location
+              <sup>
+                <i class="fa fa-asterisk" aria-hidden="true"></i>
+              </sup>
+            </label>
+            <input type="text" placeholder="" class="form-control" formControlName="vLocation" [class.is-invalid]="
+                (editvendorForm.get('vLocation')?.invalid &&
+                  editvendorForm.get('vLocation')?.touched) ||
+                (editvendorForm.get('vLocation')?.pristine && hasError)" />
+            <span class="error" *ngIf="
+                (editvendorForm.get('vLocation')?.invalid &&
+                  editvendorForm.get('vLocation')?.touched) ||
+                (editvendorForm.get('vLocation')?.pristine && hasError)
+              ">
+              Please enter your valid product size
+            </span>
+          </div>
+          <div class="col-md-6 form-group">
+            <label>Language
+              <sup>
+                <i class="fa fa-asterisk" aria-hidden="true"></i>
+              </sup>
+            </label>
+            <input [class.is-invalid]="
+                (editvendorForm.get('vlanguage')?.invalid &&
+                  editvendorForm.get('vlanguage')?.touched) ||
+                (editvendorForm.get('vlanguage')?.pristine && hasError)
+              " type="text" placeholder="" class="form-control" formControlName="vlanguage" />
+            <span class="error" *ngIf="
+                (editvendorForm.get('vlanguage')?.invalid &&
+                  editvendorForm.get('vlanguage')?.touched) ||
+                (editvendorForm.get('vlanguage')?.pristine && hasError)
+              ">
+              Please enter your valid Product Quantity
+            </span>
+          </div>
+
+          <div class="col-md-6">
+
+            <img src="{{BaseUrl}}{{editingImage}}" />
+            <div class="specs image_specs">
+              
+              <span class="closewrap">
+
+                <button type="button" class="btn btn-primary addimage">
+                  <span>
+                    <i class="fa fa-plus-circle"></i>
+                    <p>ADD VENDOR IMAGE</p>
+                  </span>
+                  <input type="file" (change)="selectFiles($event)" multiple class="form-control"
+                    id="vendorImage" formControlName="vImage"
+                    [class.is-invalid]="(editvendorForm.get('vImage')?.invalid && 
+                    editvendorForm.get('vImage')?.touched) ||
+                    (editvendorForm.get('vImage')?.pristine && hasError)
+                    " />
+                    <span class="error" *ngIf="
+                    (editvendorForm.get('vImage')?.invalid &&
+                    editvendorForm.get('vImage')?.touched) ||
+                    (editvendorForm.get('vImage')?.pristine && hasError)
+                    "></span>
+                </button>
+
+                <div *ngFor="let url of urls; let index = index" class="blockspace">
+                  <img [src]="url" alt="" width="100" height="100" />
+
+                  <i class="fas fa-times" aria-hidden="true" (click)="removeSelectedFile(index)"
+                    *ngIf="RemoveImage"></i>
+                </div>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="Editing_Image">
+              <img src="{{BaseUrl}}{{editingentityImage}}" />
+            </div>
+
+              <div class="specs image_specs">
+                
+                <span class="closewrap">
+
+                  <button type="button" class="btn btn-primary addimage">
+                    <span>
+                      <i class="fa fa-plus-circle"></i>
+                      <p>ADD ENTITY IMAGE</p>
+                    </span>
+                    <input type="file" (change)="selectFiles2($event)" multiple class="form-control"
+                      id="entityImage" formControlName="ventityImage"
+                      [class.is-invalid]="(editvendorForm.get('ventityImage')?.invalid && 
+                    editvendorForm.get('ventityImage')?.touched) ||
+                    (editvendorForm.get('ventityImage')?.pristine && hasError)
+                    " />
+                    <span class="error" *ngIf="
+                    (editvendorForm.get('ventityImage')?.invalid &&
+                    editvendorForm.get('ventityImage')?.touched) ||
+                    (editvendorForm.get('ventityImage')?.pristine && hasError)
+                    "></span>
+                  </button>
+
+                  <div *ngFor="let url of urls1; let index = index" class="blockspace">
+                    <img [src]="url" alt="" width="100" height="100" />
+
+                    <i class="fas fa-times" aria-hidden="true" (click)="removeSelectedFile1(index)"
+                      *ngIf="RemoveImage1"></i>
+                  </div>
+                </span>
+              </div>
+            </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Close
+      </button>
+      <button type="button" class="btn btn-primary" (click)="UpdateVendor()">Update Vendor</button>
+    </div>
+  </div>
+</div>
+</div> -->

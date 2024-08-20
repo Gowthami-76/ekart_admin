@@ -1,0 +1,82 @@
+.card {
+    
+}
+
+.card .card-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;      
+} 
+
+#exampleModal .mandaladd_modal {
+    margin-bottom: 15px;
+}
+
+#exampleModal .mandaladd_modal label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 13px;
+}
+
+#exampleModal .mandaladd_modal input {
+    height: 40px;
+}
+
+#exampleModal .mandaladd_modal label i {
+    color: red;
+}
+
+#exampleModal .mandaladd_modal .add_mandal_btn {
+    text-align: center;
+    margin: 15px 0px 10px 0px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+tbody tr td {
+    text-align: center;
+}
+
+.table .text-primary th{
+    text-align: center;
+}
+
+.btn-green{
+    background-color: #6ac16a;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-blue{
+    background-color: #2ab0df;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-red{
+    background-color: #f90d0dc7;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#exampleModal .mandaladd_modal .custome-select {
+    margin-bottom: 15px;
+}
+
+#exampleModal .mandaladd_modal label i {
+    color: red;
+    font-size: 12px;
+}

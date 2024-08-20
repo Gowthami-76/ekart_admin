@@ -1,0 +1,211 @@
+.wrapper .contact-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  /* background-image: url('../../../assets/images/login-bg.png'); */
+  background-image: url('../../../assets/img/login-bg.jpg');
+  background-size: cover;
+}
+.wrapper .contact-section .container {
+  max-width: 400px;
+}
+.wrapper .contact-section .container .card {
+  box-shadow: 2px 2px 35px -18px #323c8d;
+  border-radius: 10px;
+}
+.wrapper .contact-section .container .card .card-header {
+  background-color: #fff;
+}
+.wrapper .contact-section .container .card .card-header .logo {
+  text-align: center;
+}
+.wrapper .contact-section .container .card .card-header .logo img {
+  height: 70px;
+}
+.wrapper .contact-section .container .card .card-body {
+  padding: 0;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap {
+  padding: 40px 0;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap .logo {
+  text-align: center;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap h4 {
+  text-align: center;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  font-size: 28px;
+  color: #266ace;
+  font-weight: 600;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap img {
+  height: 70px;
+  display: block;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 30px;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap label {
+  font-size: 14px;
+  font-weight: 700;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap label i {
+  color: #de0505;
+  font-size: 7px;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap input.form-control {
+  border-radius: 5px;
+  background-color: #f5f5ff;
+  width: 100%;
+  height: 40px;
+  font-size: 14px;
+  padding: 10px;
+  box-shadow: none;
+  outline: none;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap span.error {
+  color: #dc3545;
+  font-size: 13px;
+}
+.remember{
+  margin: 10px 0px;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap .remember input {
+  background: #ebebeb none repeat scroll 0 0;
+  border: 1px solid #e1e1e1;
+  margin-right: 6px;
+  width: 15px;
+  margin-top: 3px;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap .remember p {
+  color: #656767;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18px;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap .remember a {
+  color: #266ace;
+  /* float: right; */
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap .remember a:hover {
+  text-decoration: underline;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap button.btn.btn-primary {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 50px;
+  width: 130px;
+  height: 40px;
+  background-color: #28b8e8;
+  background-image: linear-gradient(to right, #2cbae7, #0f347d);
+  margin: auto;
+  display: block;
+  text-transform: capitalize;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: white;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap .btn:disabled {
+  cursor: not-allowed;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap .register-page {
+  display: flex;
+  margin-top: 20px;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap .register-page p {
+  padding-right: 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.wrapper .contact-section .container .card .card-body .form-group-wrap .register-page a {
+  color: #266ace;
+  font-size: 14px;
+}
+.wrapper .contact-section .container .card .card-body input::-webkit-outer-spin-button, .wrapper .contact-section .container .card .card-body input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+@media screen and (max-width: 992px) {
+  .wrapper .contactus h2 {
+    font-size: 40px;
+ }
+  .wrapper .contact-section .form-group-wrap h4 {
+    font-size: 26px !important;
+ }
+}
+@media screen and (max-width: 768px) {
+  .wrapper .contact-section .form-group-wrap {
+    padding: 30px !important;
+ }
+  .wrapper .contact-section .form-group-wrap h4 {
+    font-size: 22px !important;
+ }
+  .wrapper .contact-section .form-group-wrap button.btn.btn-primary {
+    margin: 20px 0 !important;
+    width: 100% !important;
+    font-size: 13px;
+ }
+  .wrapper .contact-section .form-group-wrap .register-page {
+    display: block !important;
+    margin-top: 0px !important;
+ }
+  .wrapper .contact-section .form-group-wrap .register-page p {
+    margin-bottom: 0px !important;
+ }
+  .wrapper .contactus h2 {
+    font-size: 28px !important;
+ }
+  .wrapper .background-image {
+    min-height: 120px !important;
+ }
+}
+@media screen and (max-width: 480px) {
+  .wrapper .contact-section .form-group-wrap h4 {
+    font-size: 16px !important;
+ }
+  .wrapper .contact-section .form-group-wrap label {
+    font-size: 13px !important;
+ }
+  .wrapper .contact-section .form-group-wrap .remember span {
+    display: flex !important;
+ }
+  .wrapper .contact-section .form-group-wrap .remember a {
+    float: left !important;
+    font-size: 13px !important;
+ }
+  .wrapper .contact-section .form-group-wrap .remember p {
+    font-size: 13px !important;
+ }
+  .wrapper .contact-section .form-group-wrap .register-page p {
+    font-size: 13px !important;
+ }
+  .wrapper .contact-section .form-group-wrap .register-page a {
+    font-size: 13px !important;
+ }
+  .wrapper .contact-section .form-group-wrap button.btn.btn-primary {
+    width: 100% !important;
+    font-size: 13px !important;
+ }
+  .wrapper .contactus h2 {
+    font-size: 22px !important;
+ }
+  .wrapper .background-image {
+    min-height: 120px !important;
+ }
+}
+
+.ekart-logo{
+  margin-bottom: 0px!important;
+  margin-top: 15px;
+}

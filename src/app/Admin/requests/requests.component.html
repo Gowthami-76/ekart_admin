@@ -1,0 +1,505 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Requests</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link linkss active"
+                id="pills-home-tab"
+                data-toggle="pill"
+                href="#pills-home"
+                role="tab"
+                aria-controls="pills-home"
+                aria-selected="true"
+                >Product Request</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link linkss"
+                id="pills-profile-tab"
+                data-toggle="pill"
+                href="#pills-profile"
+                role="tab"
+                aria-controls="pills-profile"
+                aria-selected="false"
+                >Location Request</a
+              >
+            </li>
+          </ul>
+          <div class="tab-content" id="pills-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="pills-home"
+              role="tabpanel"
+              aria-labelledby="pills-home-tab"
+            >
+              <table class="table">
+                <thead class="text-primary">
+                  <th>S.No</th>
+                  <th>Request</th>
+                  <th>User Name</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let requests of requestData; let i = index">
+                    <td>
+                      <p>{{ i + 1 }}</p>
+                    </td>
+                    <td>
+                      <p>{{ requests?.productRequest }}</p>
+                    </td>
+                    <td (click)="requestVendorDetails(requests)">
+                      <p>
+                        {{ requests.userId[0]?.firstName }}
+                        {{ requests.userId[0]?.lastName }}
+                      </p>
+                    </td>
+                    <td>
+                      <p>{{ requests?.description }}</p>
+                    </td>
+                    <td>
+                      <button
+                        class="btn-green"
+                        type="button"
+                        (click)="onView(requests)"
+                      >
+                        <i class="fa fa-eye"></i>
+                      </button>
+
+                      <button
+                        class="btn-red"
+                        type="button"
+                        (click)="Ondelete(requests)"
+                      >
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="pills-profile"
+              role="tabpanel"
+              aria-labelledby="pills-profile-tab"
+            >
+              <table class="table">
+                <thead class="text-primary">
+                  <th>S.No</th>
+                  <th>Request</th>
+                  <th>User Name</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let locationReq of locationData; let i = index">
+                    <td>
+                      <p>{{ i + 1 }}</p>
+                    </td>
+                    <td>
+                      <p>{{ locationReq?.locationRequest }}</p>
+                    </td>
+                    <td (click)="getlocationDetails(locationReq)">
+                      <p>
+                        {{ locationReq.userId[0]?.firstName }}
+                        {{ locationReq.userId[0]?.lastName }}
+                      </p>
+                    </td>
+                    <td>
+                      <p>{{ locationReq?.description }}</p>
+                    </td>
+                    <td>
+                      <button
+                        class="btn-green"
+                        type="button"
+                        (click)="onViewLocation(locationReq)"
+                      >
+                        <i class="fa fa-eye"></i>
+                      </button>
+
+                      <button
+                        class="btn-red"
+                        type="button"
+                        (click)="OndeleteLocation(locationReq)"
+                      >
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- <table class="table">
+                        <thead class=" text-primary">
+                            <th>
+                                S.No
+                            </th>
+                            <th>
+                                Request
+                            </th>
+                            <th>
+                                User ID
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let requests of requestData; let i = index">
+                                <td>
+                                    <p>{{ i + 1 }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ requests?.request }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ requests?.userId }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ requests?.description }}</p>
+                                </td>
+                                <td>
+                                    <button class="btn-green" type="button" (click)="onView(requests)" >
+                                        <i class="fas fa-eye"></i>
+                                      </button>
+
+                                    <button class="btn-red" type="button" (click)="Ondelete(requests)" >
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- View product request -->
+<div
+  class="modal fade"
+  id="requestViewModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="requestViewModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="requestViewModalLabel">Requests View</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section>
+          <div class="view_languages">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="language_name">
+                  <label>Request:</label>
+                  <p>{{ requestView?.productRequest }}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="language_name">
+                  <label>User Name:</label>
+                  <p>
+                    {{ requestView?.userId[0]?.firstName }}
+                    {{ requestView?.userId[0]?.lastName }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="language_name">
+                  <label>Description:</label>
+                  <p>{{ requestView?.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- View location request -->
+<div
+  class="modal fade"
+  id="locationViewModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="locationViewModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="locationViewModalLabel">Requests View</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section>
+          <div class="view_languages">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="language_name">
+                  <label>Request:</label>
+                  <p>{{ locationView?.locationRequest }}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="language_name">
+                  <label>User Name:</label>
+                  <p>
+                    {{ locationView?.userId[0]?.firstName }}
+                    {{ locationView?.userId[0]?.lastName }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="language_name">
+                  <label>Description:</label>
+                  <p>{{ locationView?.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- product request modal -->
+<div
+  class="modal fade"
+  id="requestModalDetails"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="requestModalDetailsTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-width" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="requestModalDetailsTitle">
+          Vendor Details
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="modalRequestClose()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section class="detailsView">
+          <div class="userdetailsView">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Vendor Name :</label>
+                  <p>{{ reqData?.firstName }}{{ reqData?.lastName }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Mobile Number :</label>
+                  <p>{{ reqData?.mobileNum }}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Alternative Mobile Number :</label>
+                  <p>{{ reqData?.altNumber }}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Email Id :</label>
+                  <p>{{ reqData?.emailId }}</p>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-6">
+                      <div class="User_detailss">
+                        <label>Size :</label>
+                        <p>{{ viewVendorProduct?.size }}</p>
+                      </div>
+                    </div> -->
+              <!-- <div class="col-md-6">
+                      <div class="User_detailss">
+                        <label>Length :</label>
+                        <p>{{ viewVendorProduct?.length }}</p>
+                      </div>
+                    </div> -->
+              <!-- <div class="col-md-6">
+                      <div class="User_detailss">
+                        <label>Location :</label>
+                        <p>{{ viewVendorProduct?.location }}</p>
+                      </div>
+                    </div> -->
+              <!-- <div class="col-md-6">
+                      <div class="User_detailss">
+                        <label>Quantity :</label>
+                        <p>{{ viewVendorProduct?.quantity }}</p>
+                      </div>
+                    </div> -->
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="modalRequestClose()"
+        >
+          Close
+        </button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- location Request Modal -->
+<div
+  class="modal fade"
+  id="locationModalDetails"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="locationModalDetailsTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-width" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="locationModalDetailsTitle">
+          Vendor Details
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="modalLocationClose()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section class="detailsView">
+          <div class="userdetailsView">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Vendor Name :</label>
+                  <p>
+                    {{ reqlocationData?.firstName
+                    }}{{ reqlocationData?.lastName }}
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Mobile Number :</label>
+                  <p>{{ reqlocationData?.mobileNum }}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Alternative Mobile Number :</label>
+                  <p>{{ reqlocationData?.altNumber }}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Email Id :</label>
+                  <p>{{ reqlocationData?.emailId }}</p>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-6">
+                      <div class="User_detailss">
+                        <label>Size :</label>
+                        <p>{{ viewVendorProduct?.size }}</p>
+                      </div>
+                    </div> -->
+              <!-- <div class="col-md-6">
+                      <div class="User_detailss">
+                        <label>Length :</label>
+                        <p>{{ viewVendorProduct?.length }}</p>
+                      </div>
+                    </div> -->
+              <!-- <div class="col-md-6">
+                      <div class="User_detailss">
+                        <label>Location :</label>
+                        <p>{{ viewVendorProduct?.location }}</p>
+                      </div>
+                    </div> -->
+              <!-- <div class="col-md-6">
+                      <div class="User_detailss">
+                        <label>Quantity :</label>
+                        <p>{{ viewVendorProduct?.quantity }}</p>
+                      </div>
+                    </div> -->
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="modalLocationClose()"
+        >
+          Close
+        </button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

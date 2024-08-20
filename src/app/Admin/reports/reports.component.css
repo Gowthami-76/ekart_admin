@@ -1,0 +1,25 @@
+tbody tr td {
+  text-align: center;
+}
+
+.table .text-primary th {
+  text-align: center;
+}
+
+.btn-red {
+  background-color: #f90d0dc7;
+  border: none;
+  padding: 8px 10px;
+  margin-right: 5px;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/* .userdetailsView{
+    border-bottom: 1px solid #000;
+    margin-bottom: 25px;
+} */
+
+.modal-width {
+  min-width: 600px;
+}

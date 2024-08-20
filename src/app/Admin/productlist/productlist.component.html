@@ -1,0 +1,1646 @@
+<!-- Create Modal -->
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Product Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="productAddForm">
+          <div class="row">           
+
+            <div class="col-md-6 form-group">
+              <div class="">
+                <label>Product Name 1&nbsp;<sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup></label>
+
+                <input type="text" class="form-control" placeholder="Enter Product Name 1" formControlName="productName1">
+              </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <div class="">
+                <label>Product Name 2&nbsp;<sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup></label>
+
+                <input type="text" class="form-control" placeholder="Enter Product Name 2" formControlName="productName2">
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="language_list">
+                <label>Select Language&nbsp;<sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup></label>
+
+
+              </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <label>Product Name&nbsp;
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input type="text" placeholder="Enter Product Key Name" class="form-control" formControlName="pname" [class.is-invalid]="
+                  (productForm.get('pname')?.invalid &&
+                    productForm.get('pname')?.touched) ||
+                  (productForm.get('pname')?.pristine && hasError)
+                " />
+
+              <span class="error" *ngIf="
+                  (productForm.get('pname')?.invalid &&
+                    productForm.get('pname')?.touched) ||
+                  (productForm.get('pname')?.pristine && hasError)
+                ">
+                Please enter your Valid Product Name
+              </span>
+            </div>
+
+            <div class="col-md-6">
+              <div class="specs image_specs">
+                <span class="closewrap">
+                  <label>Product Image&nbsp;<sup>
+                      <i class="fa fa-asterisk" aria-hidden="true"></i>
+                    </sup></label>
+                  <br />
+                  <button type="button" class="btn btn-primary addimage">
+                    <span>
+                      <i class="fa fa-plus-circle"></i>
+                      <p>ADD PRODUCT IMAGE</p>
+                    </span>
+                    <input type="file" (change)="selectFiles($event)" multiple class="form-control"
+                      id="MODELIMAGEUPLOAD" formControlName="MODELIMAGEUPLOAD" />
+                  </button>
+
+                  <div *ngFor="let url of urls; let index = index" class="blockspace">
+                    <img [src]="url" alt="" width="100" height="100" />
+
+                    <i class="fas fa-times" aria-hidden="true" (click)="removeSelectedFile(index)"
+                      *ngIf="RemoveImage"></i>
+                  </div>
+                </span>
+              </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <div>
+                <label>Product Alias Name&nbsp;<sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup></label>
+
+                <input type="text" class="form-control" placeholder="Enter Aliase Name">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Add Product</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Product Details</h4>
+      <div
+        class="create_button"
+        data-target="#exampleModal"
+        data-toggle="modal"
+      >
+        <!-- <button type="btn" class="add-product">Add Product</button> -->
+        <button type="button" class="add-product">Add Product</button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <div class="search_filter">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="searchbutton">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search Here..."
+                  [(ngModel)]="searchKey"
+                />
+                <button
+                  type="submit"
+                  class="bnt search_btn"
+                  (click)="searchProduct()"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+
+            <div class="col-md-2"></div>
+          </div>
+        </div>
+
+        <table class="table">
+          <thead class="text-primary">
+            <th>S.No</th>
+            <th>
+              Product Name 1
+              <i
+                (click)="onSortClick($event)"
+                class="my-icon fa fa-chevron-up"
+              ></i>
+            </th>
+            <th>product Name 2</th>
+            <!--<th>Lanuages</th>-->
+            <th>Product Image</th>
+            <!--<th>Product Alias Name</th>-->
+            <th>Product Code</th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let productsList of productsList; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td (click)="getVendorProductDetails(productsList)">
+                <ul
+                  *ngFor="
+                    let productName1 of productsList?.productInfo;
+                    let i = index
+                  "
+                >
+                  <li>{{ productName1?.productName1 }}</li>
+                </ul>
+                <!-- <p>{{ productsList?.productInfo[0]?.productName1 }}</p> -->
+              </td>
+              <td>
+                <ul
+                  *ngFor="
+                    let productName2 of productsList?.productInfo;
+                    let i = index
+                  "
+                >
+                  <li>{{ productName2?.productName2 }}</li>
+                </ul>
+                <!-- <p>{{ productsList?.productInfo[0]?.productName2 }}</p> -->
+              </td>
+              <td class="productImg">
+                <!-- <ng-containner *ngIf="productsList?.productImage.length > 0">
+                  <div *ngFor="let imageUrl of productsList?.productImage">
+                    <img src="{{ BaseUrl }}{{ imageUrl }}" />
+                  </div>
+                </ng-containner> -->
+                <div *ngFor="let imageUrl of productsList?.productImage">
+                  <img src="{{ BaseUrl }}{{ imageUrl }}" />
+                </div>
+              </td>
+              <td>
+                <p>{{ productsList?.productCode }}</p>
+              </td>
+              <!-- <td>
+                <p>{{ productsList?.size }}</p>
+              </td>
+              <td>
+                <p>{{ productsList?.location }}</p>
+              </td>-->
+              <td>
+                <button
+                  class="btn-yellow"
+                  type="button"
+                  (click)="onLangAdd(productsList)"
+                >
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button
+                  class="btn-green"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#ViewProductModal"
+                  (click)="OnView(productsList)"
+                >
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button
+                  class="btn-blue"
+                  type="button"
+                  (click)="OnEdit(productsList)"
+                >
+                  <i class="fa fa-pencil"></i>
+                </button>
+                <button
+                  class="btn-red"
+                  type="button"
+                  (click)="delete(productsList)"
+                >
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- model test -->
+  <div
+    class="modal fade"
+    id="EditProductModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="EditProductModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="EditProductModal">Product Info</h5>
+
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            (click)="editModalReset()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body edit-body">
+          <!-- <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <div *ngFor="let editprodform of editProductDetails.productInfo">
+              <a class="nav-item nav-link active" id="{{editprodform.languageId[0].language}}-tab" data-toggle="tab" href="#{{editprodform.languageId[0].language}}" role="tab"
+                aria-controls="{{editprodform.languageId[0].language}}" aria-selected="true">{{editprodform.languageId[0].language}}</a>
+            </div>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div *ngFor="let editprodform of editProductDetails.productInfo">
+          <div class="tab-pane fade show active" id="{{editprodform.languageId[0].language}}" role="tabpanel" aria-labelledby="{{editprodform.languageId[0].language}}-tab">{{editprodform.languageId[0].language}}</div>
+         </div>
+        </div> -->
+          <ul class="nav nav-tabs">
+            <li
+              class="nav-item"
+              *ngFor="
+                let editprodform of editProductDetails.productInfo;
+                index as i
+              "
+            >
+              <a
+                class="nav-link"
+                [class.active]="activeTabId == i"
+                (click)="setActiveTab(i, editprodform)"
+                >{{ editprodform?.languageId[0]?.language }}</a
+              >
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div
+              class="tab-pane fade"
+              *ngFor="
+                let editprodform of editProductDetails.productInfo;
+                index as i
+              "
+              [class.show]="activeTabId === i"
+              [class.active]="activeTabId === i"
+            >
+              <!-- <img *ngIf="activeTabId === 0" src="{{ BaseUrl }}{{editProductDetails.productImage[0]}}" alt="">
+            <h3>{{ editprodform.languageId[0].language }}</h3> -->
+              <form [formGroup]="editProductForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="vehicle_image">
+                      <label>Product Image 1</label>
+                      <div class="specs image_specs">
+                        <div class="editing_image" *ngIf="IsproductImage1">
+                          <img
+                            src="{{ BaseUrl }}{{
+                              editProductDetails.productImage[0]
+                            }}"
+                          />
+                          <i
+                            class="fa fa-times cross-sym"
+                            aria-hidden="true"
+                            (click)="IsproductImage1 = false; deleteProduct1()"
+                          ></i>
+                          <!-- <P>(click)="editingProductImage1 = ''; IsproductImage1 = false;editimageclear() ;deleteProduct1()"</P> -->
+                        </div>
+
+                        <div class="specs image_specs">
+                          <span class="closewrap">
+                            <div
+                              *ngFor="let url of urls2; let index = index"
+                              class="blockspace"
+                            >
+                              <img
+                                [src]="url"
+                                alt=""
+                                width="100"
+                                height="100"
+                                class="prod-img"
+                              />
+
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="removeSelectedFile2(index)"
+                                *ngIf="RemoveImage2"
+                              ></i>
+                            </div>
+
+                            <button
+                              type="button"
+                              class="btn btn-primary addimage"
+                            >
+                              <span>
+                                <i class="fa fa-plus-circle"></i>
+                                <p>EDIT PRODUCT IMAGE 1</p>
+                              </span>
+                              <input
+                                type="file"
+                                (change)="selectFiles2($event)"
+                                accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                class="form-control"
+                                id="MODELIMAGEUPLOAD"
+                                formControlName="editProdimage"
+                              />
+                            </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="vehicle_image">
+                      <label>Product Image 2</label>
+                      <div class="specs image_specs">
+                        <div class="editing_image" *ngIf="IsproductImage2">
+                          <img
+                            src="{{ BaseUrl }}{{
+                              editProductDetails.productImage2[0]
+                            }}"
+                          />
+                          <i
+                            class="fa fa-times cross-sym"
+                            aria-hidden="true"
+                            (click)="IsproductImage2 = false; deleteProduct2()"
+                          ></i>
+                        </div>
+
+                        <div class="specs image_specs">
+                          <span class="closewrap">
+                            <div
+                              *ngFor="let url of urls3; let index = index"
+                              class="blockspace"
+                            >
+                              <img
+                                [src]="url"
+                                alt=""
+                                width="100"
+                                height="100"
+                                class="prod-img"
+                              />
+
+                              <i
+                                class="fa fa-times cross-sym"
+                                aria-hidden="true"
+                                (click)="removeSelectedFile3(index)"
+                                *ngIf="RemoveImage3"
+                              ></i>
+                            </div>
+
+                            <button
+                              type="button"
+                              class="btn btn-primary addimage"
+                            >
+                              <span>
+                                <i class="fa fa-plus-circle"></i>
+                                <p>EDIT PRODUCT IMAGE 2</p>
+                              </span>
+                              <input
+                                type="file"
+                                (change)="selectFiles3($event)"
+                                accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                                class="form-control"
+                                id="MODELIMAGEUPLOAD"
+                                formControlName="editProdimage1"
+                              />
+                            </button>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 form-group">
+                    <label
+                      >Product Name 1
+                      <sup>
+                        <i class="fa fa-asterisk" aria-hidden="true"></i>
+                      </sup>
+                    </label>
+                    <input
+                      type="text"
+                      placeholder=""
+                      class="form-control"
+                      formControlName="productName1"
+                      [class.is-invalid]="
+                        (editProductForm.get('productName1')?.invalid &&
+                          editProductForm.get('productName1')?.touched) ||
+                        (editProductForm.get('productName1')?.pristine &&
+                          hasError)
+                      "
+                    />
+
+                    <span
+                      class="error"
+                      *ngIf="
+                        (editProductForm.get('productName1')?.invalid &&
+                          editProductForm.get('productName1')?.touched) ||
+                        (editProductForm.get('productName1')?.pristine &&
+                          hasError)
+                      "
+                    >
+                      Please enter your Product Name
+                    </span>
+                  </div>
+
+                  <div class="col-md-6 form-group">
+                    <label
+                      >Product Name 2
+                      <!-- <sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup> -->
+                    </label>
+                    <input
+                      type="text"
+                      placeholder=""
+                      class="form-control"
+                      formControlName="productName2"
+                    />
+                  </div>
+
+                  <div class="col-md-6 form-group">
+                    <label>Product Alias Names :</label>
+                    <button
+                      type="button"
+                      class="add-removes"
+                      (click)="addAlternateAliesGroup('edit')"
+                    >
+                      ADD
+                    </button>
+
+                    <!-- <input type="text" formControlName="aliesGroup" /> -->
+                    <!-- *ngFor="
+                  let email of alternateAliesGroup.controls;
+                  let i = index
+                " -->
+
+                    <div formArrayName="productAliasName">
+                      <div
+                        *ngFor="
+                          let productAName of productAliasNameArray.controls;
+                          let nvalue = index
+                        "
+                      >
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Alias Name"
+                          [formControlName]="nvalue"
+                        />
+                        <button
+                          class="add-removes"
+                          (click)="removevalue(nvalue)"
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+
+                    <!-- <div formArrayName="aliesGroup">
+    <div *ngFor="let value of productForm.controls.aliesGroup?.value; let i = index" class="d-flex" formGroupName="i"> 
+      <div [formGroupName]="i">
+        <input type="text" class="form-control form-controlss" formControlName="i">
+        <button class="add-removes" (click)="removevalue(i)">Remove</button>
+      </div>
+    </div>
+    </div>
+                <button class="add-removes" (click)="addvalue()">ADD</button> -->
+                  </div>
+
+                  <!-- <div class="col-md-6">
+    
+                <img src="{{BaseUrl}}{{editingImage}}" />
+                <div class="specs image_specs">
+                  
+                  <span class="closewrap">
+    
+                    <button type="button" class="btn btn-primary addimage">
+                      <span>
+                        <i class="fa fa-plus-circle"></i>
+                        <p>Product Image</p>
+                      </span>
+                      <input type="file" (change)="selectFiles($event)" multiple class="form-control"
+                        id="prodImage" formControlName="prodImage"
+                        [class.is-invalid]="(editProductForm.get('prodImage')?.invalid && 
+                        editProductForm.get('prodImage')?.touched) ||
+                        (editProductForm.get('prodImage')?.pristine && hasError)
+                        " />
+                        <span class="error" *ngIf="
+                        (editProductForm.get('prodImage')?.invalid &&
+                        editProductForm.get('prodImage')?.touched) ||
+                        (editProductForm.get('prodImage')?.pristine && hasError)
+                        "></span>
+                    </button>
+    
+                    <div *ngFor="let url of urls; let index = index" class="blockspace">
+                      <img [src]="url" alt="" width="100" height="100" />
+    
+                      <i class="fas fa-times" aria-hidden="true" (click)="removeSelectedFile(index)"
+                        *ngIf="RemoveImage"></i>
+                    </div>
+                  </span>
+                </div>
+              </div> -->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-dismiss="modal"
+            (click)="editModalReset()"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="UpdateVendor()"
+          >
+            Update Product
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End model test -->
+</div>
+
+<!-- Create Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Product Info</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="ProductModalClose()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body scroll-body">
+        <form [formGroup]="productImageForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="specs image_specs">
+                <span class="closewrap">
+                  <button type="button" class="btn btn-primary addimage">
+                    <span>
+                      <!-- <i class="fa fa-plus-circle"></i> -->
+                      <p>PRODUCT IMAGE 1</p>
+                    </span>
+                    <input
+                      type="file"
+                      (change)="selectFiles($event)"
+                      class="form-control prod-img"
+                      id="vendorImage"
+                      formControlName="pimage"
+                      accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                    />
+                    <!-- <span class="error" *ngIf="
+                      (productForm.get('pimage')?.invalid &&
+                      productForm.get('pimage')?.touched) ||
+                      (productForm.get('pimage')?.pristine && hasError)
+                      ">[class.is-invalid]="(productForm.get('pimage')?.invalid && 
+                      productForm.get('pimage')?.touched) ||
+                      (productForm.get('pimage')?.pristine && hasError)
+                      "
+                    </span> -->
+                  </button>
+
+                  <div
+                    *ngFor="let url of urls; let index = index"
+                    class="blockspace"
+                  >
+                    <img src="{{ url }}" alt="" width="100" height="100" />
+
+                    <i
+                      class="fa fa-times cross-sym"
+                      aria-hidden="true"
+                      (click)="removeSelectedFile(index)"
+                      *ngIf="RemoveImage"
+                    ></i>
+                  </div>
+                </span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="specs image_specs">
+                <span class="closewrap">
+                  <button type="button" class="btn btn-primary addimage">
+                    <span>
+                      <i class="fa fa-plus-circle"></i>
+                      <p>PRODUCT IMAGE 2</p>
+                    </span>
+                    <input
+                      type="file"
+                      (change)="selectFiles1($event)"
+                      class="form-control prod-img"
+                      id="vendorImage"
+                      formControlName="pimage2"
+                      accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                    />
+                    <!-- <span class="error" *ngIf="
+                      (productForm.get('pimage')?.invalid &&
+                      productForm.get('pimage')?.touched) ||
+                      (productForm.get('pimage')?.pristine && hasError)
+                      ">[class.is-invalid]="(productForm.get('pimage')?.invalid && 
+                      productForm.get('pimage')?.touched) ||
+                      (productForm.get('pimage')?.pristine && hasError)
+                      "
+                    </span> -->
+                  </button>
+
+                  <div
+                    *ngFor="let url of urls1; let index = index"
+                    class="blockspace"
+                  >
+                    <img [src]="url" alt="" width="100" height="100" />
+
+                    <i
+                      class="fa fa-times cross-sym"
+                      aria-hidden="true"
+                      (click)="removeSelectedFile1(index)"
+                      *ngIf="RemoveImage1"
+                    ></i>
+                  </div>
+                </span>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-6 form-group">
+              <label>Product Alias Names :</label>
+              <button
+                type="button"
+                class="add-removes"
+                (click)="addAlternateAliesGroup()"
+              >
+                ADD
+              </button> -->
+
+            <!-- <input type="text" formControlName="aliesGroup" /> -->
+            <!-- <div
+                formArrayName="productAliasName"
+                *ngFor="
+                  let email of alternateAliesGroup.controls;
+                  let i = index
+                "
+              >
+                <input type="text" class="form-control" [formControlName]="i" />
+                <button class="add-removes" (click)="removevalue(i)">
+                  Remove
+                </button>
+              </div> -->
+
+            <!-- <div formArrayName="aliesGroup">
+  <div *ngFor="let value of productForm.controls.aliesGroup?.value; let i = index" class="d-flex" formGroupName="i"> 
+    <div [formGroupName]="i">
+      <input type="text" class="form-control form-controlss" formControlName="i">
+      <button class="add-removes" (click)="removevalue(i)">Remove</button>
+    </div>
+  </div>
+</div>
+              <button class="add-removes" (click)="addvalue()">ADD</button> -->
+            <!-- </div> -->
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="ProductModalClose()"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="addProductImages()"
+        >
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create Modal -->
+<div
+  class="modal fade"
+  id="ProductlistModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ProductlistModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ProductlistModalLabel">Product Info</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="ProductModalClose()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body scroll-body">
+        <form [formGroup]="productForm">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label
+                >Product Name 1
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input
+                type="text"
+                placeholder=""
+                class="form-control"
+                formControlName="productName"
+                [class.is-invalid]="
+                  (productForm.get('productName')?.invalid &&
+                    productForm.get('productName')?.touched) ||
+                  (productForm.get('productName')?.pristine && hasError)
+                "
+              />
+              <span
+                class="error"
+                *ngIf="
+                  (productForm.get('productName')?.invalid &&
+                    productForm.get('productName')?.touched) ||
+                  (productForm.get('productName')?.pristine && hasError)
+                "
+              >
+                Please enter your Valid Product Name 1
+              </span>
+            </div>
+
+            <!-- <div class="col-md-6 form-group">
+                <label>Product Code
+                  <sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup>
+                </label>
+                <input type="text" placeholder="" class="form-control" formControlName="pcode" [class.is-invalid]="
+                    (productForm.get('pcode')?.invalid &&
+                    productForm.get('pcode')?.touched) ||
+                    (productForm.get('pcode')?.pristine && hasError)
+                  " />
+  
+                <span class="error" *ngIf="
+                    (productForm.get('pcode')?.invalid &&
+                    productForm.get('pcode')?.touched) ||
+                    (productForm.get('pcode')?.pristine && hasError)
+                  ">
+                  Please enter your Valid product code
+                </span>
+            </div> -->
+
+            <div class="col-md-6 form-group">
+              <label
+                >Product Name 2
+                <!-- <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup> -->
+              </label>
+              <input
+                type="text"
+                placeholder=""
+                class="form-control"
+                formControlName="productName1"
+              />
+
+              <!-- <span class="error" *ngIf="
+                  (productForm.get('productName')?.invalid &&
+                  productForm.get('productName')?.touched) ||
+                  (productForm.get('productName')?.pristine && hasError)
+                ">
+                Please enter your Valid Product Name 1
+              </span> -->
+            </div>
+
+            <div class="col-md-6 form-group">
+              <label>Product Alias Names :</label>
+              <button
+                type="button"
+                class="add-removes"
+                (click)="addAlternateAliesGroup('create')"
+              >
+                ADD
+              </button>
+
+              <!-- <input type="text" formControlName="aliesGroup" /> -->
+              <div
+                formArrayName="productAliasName"
+                *ngFor="
+                  let email of alternateAliesGroup.controls;
+                  let i = index
+                "
+              >
+                <input type="text" class="form-control" [formControlName]="i" />
+                <button class="add-removes" (click)="removevalue(i)">
+                  Remove
+                </button>
+              </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <div class="specs">
+                <label>Choose Language</label>
+                <select
+                  class="form-control brand-select"
+                  id="Langname"
+                  formControlName="Langname"
+                  placeholder="Select the Language Name"
+                  (change)="changeWebsite($event.target.selectedIndex)"
+                >
+                  <option>Select Languages</option>
+                  <option
+                    *ngFor="let LangDetails of langDetails"
+                    value="LangDetails.languageId"
+                  >
+                    {{ LangDetails?.language }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="ProductModalClose()"
+        >
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="addProduct()">
+          Add Product
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- language add Modal -->
+<div
+  class="modal fade"
+  id="ProductlangModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ProductlangModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ProductlangModalLabel">Product Info</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="ProductModalClose()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body scroll-body">
+        <form [formGroup]="productLangForm">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label
+                >Product Name 1
+                <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup>
+              </label>
+              <input
+                type="text"
+                placeholder=""
+                class="form-control"
+                formControlName="productName"
+                [class.is-invalid]="
+                  (productLangForm.get('productName')?.invalid &&
+                    productLangForm.get('productName')?.touched) ||
+                  (productLangForm.get('productName')?.pristine && hasError)
+                "
+              />
+              <span
+                class="error"
+                *ngIf="
+                  (productLangForm.get('productName')?.invalid &&
+                    productLangForm.get('productName')?.touched) ||
+                  (productLangForm.get('productName')?.pristine && hasError)
+                "
+              >
+                Please enter your Valid Product Name 1
+              </span>
+            </div>
+
+            <!-- <div class="col-md-6 form-group">
+                <label>Product Code
+                  <sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup>
+                </label>
+                <input type="text" placeholder="" class="form-control" formControlName="pcode" [class.is-invalid]="
+                    (productForm.get('pcode')?.invalid &&
+                    productForm.get('pcode')?.touched) ||
+                    (productForm.get('pcode')?.pristine && hasError)
+                  " />
+  
+                <span class="error" *ngIf="
+                    (productForm.get('pcode')?.invalid &&
+                    productForm.get('pcode')?.touched) ||
+                    (productForm.get('pcode')?.pristine && hasError)
+                  ">
+                  Please enter your Valid product code
+                </span>
+            </div> -->
+
+            <div class="col-md-6 form-group">
+              <label
+                >Product Name 2
+                <!-- <sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup> -->
+              </label>
+              <input
+                type="text"
+                placeholder=""
+                class="form-control"
+                formControlName="productName1"
+              />
+
+              <!-- <span class="error" *ngIf="
+                  (productForm.get('productName')?.invalid &&
+                  productForm.get('productName')?.touched) ||
+                  (productForm.get('productName')?.pristine && hasError)
+                ">
+                Please enter your Valid Product Name 1
+              </span> -->
+            </div>
+
+            <div class="col-md-6 form-group">
+              <label>Product Alias Names :</label>
+              <button
+                type="button"
+                class="add-removes"
+                (click)="addAlternateAliesGroup('langAdd')"
+              >
+                ADD
+              </button>
+
+              <!-- <input type="text" formControlName="aliesGroup" /> -->
+              <div
+                formArrayName="productAliasName"
+                *ngFor="
+                  let email of alternateAliesGroup.controls;
+                  let i = index
+                "
+              >
+                <input type="text" class="form-control" [formControlName]="i" />
+                <button class="add-removes" (click)="removevalue(i)">
+                  Remove
+                </button>
+              </div>
+            </div>
+
+            <div class="col-md-6 form-group">
+              <div class="specs">
+                <label>Choose Language</label>
+                <select
+                  class="form-control brand-select"
+                  id="Langname"
+                  formControlName="Langname"
+                  placeholder="Select the Language Name"
+                  (change)="changeWebsite($event.target.selectedIndex)"
+                >
+                  <option>Select Languages</option>
+                  <option
+                    *ngFor="let LangDetails of langDetails"
+                    value="LangDetails.languageId"
+                  >
+                    {{ LangDetails?.language }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="ProductModalClose()"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="addProductLang()"
+        >
+          Add Product Language
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- view Modal -->
+<div
+  class="modal fade"
+  id="ViewProductModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="ViewProductModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ViewProductModalLabel">Product Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section class="detailsView">
+          <div class="userdetailsView">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Product Name 1 :</label>
+                  <ul
+                    *ngFor="
+                      let productName1 of podView?.productInfo;
+                      let i = index
+                    "
+                  >
+                    <li>{{ productName1?.productName1 }}</li>
+                  </ul>
+                  <!-- <p>{{ podView?.productName1 }}</p> -->
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Product Name 2 :</label>
+                  <ul
+                    *ngFor="
+                      let productName2 of podView?.productInfo;
+                      let i = index
+                    "
+                  >
+                    <li>{{ productName2?.productName2 }}</li>
+                  </ul>
+
+                  <!-- <p>{{ podView?.productName }}</p> -->
+                </div>
+              </div>
+
+              <!-- <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Product Code :</label>
+                  <p>{{ podView?.productCode }}</p>
+                </div>
+              </div> -->
+
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Product Image 1 :</label>
+                  <p>
+                    <img
+                      src="{{ BaseUrl }}{{ podView?.productImage }}"
+                      class="viewmodelimg"
+                      width="100px"
+                      height="100px"
+                    />
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Product Image 2 :</label>
+                  <p>
+                    <img
+                      src="{{ BaseUrl }}{{ podView?.productImage2 }}"
+                      class="viewmodelimg"
+                      width="100px"
+                      height="100px"
+                    />
+                  </p>
+                </div>
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>Product Alias Names :</label>
+
+                <!-- <input type="text" formControlName="aliesGroup" /> -->
+                <ul
+                  *ngFor="let aliasName of podView?.productInfo; let i = index"
+                >
+                  <ul
+                    *ngFor="
+                      let aliasNamess of aliasName?.productAliasName;
+                      let i = index
+                    "
+                  >
+                    <li>{{ aliasNamess }}</li>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--edit model -->
+<div
+  class="modal fade"
+  id="EditProductModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="EditProductModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="EditProductModal">Product Info</h5>
+        <span>{{ editProductForm.value | json }}</span>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="editModalReset()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body edit-body">
+        <!-- <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <div *ngFor="let editprodform of editProductDetails.productInfo">
+              <a class="nav-item nav-link active" id="{{editprodform.languageId[0].language}}-tab" data-toggle="tab" href="#{{editprodform.languageId[0].language}}" role="tab"
+                aria-controls="{{editprodform.languageId[0].language}}" aria-selected="true">{{editprodform.languageId[0].language}}</a>
+            </div>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div *ngFor="let editprodform of editProductDetails.productInfo">
+          <div class="tab-pane fade show active" id="{{editprodform.languageId[0].language}}" role="tabpanel" aria-labelledby="{{editprodform.languageId[0].language}}-tab">{{editprodform.languageId[0].language}}</div>
+         </div>
+        </div> -->
+        <ul class="nav nav-tabs">
+          <li
+            class="nav-item"
+            *ngFor="
+              let editprodform of editProductDetails.productInfo;
+              index as i
+            "
+          >
+            <a
+              class="nav-link"
+              [class.active]="activeTabId == i"
+              (click)="setActiveTab(i, editprodform)"
+              >{{ editprodform?.languageId[0]?.language }}</a
+            >
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div
+            class="tab-pane fade"
+            *ngFor="
+              let editprodform of editProductDetails.productInfo;
+              index as i
+            "
+            [class.show]="activeTabId === i"
+            [class.active]="activeTabId === i"
+          >
+            <!-- <img *ngIf="activeTabId === 0" src="{{ BaseUrl }}{{editProductDetails.productImage[0]}}" alt="">
+            <h3>{{ editprodform.languageId[0].language }}</h3> -->
+            <form [formGroup]="editProductForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="vehicle_image">
+                    <label>Product Image 1</label>
+                    <div class="specs image_specs">
+                      <div class="editing_image" *ngIf="IsproductImage1">
+                        <img
+                          src="{{ BaseUrl }}{{
+                            editProductDetails.productImage[0]
+                          }}"
+                        />
+                        <i
+                          class="fa fa-times cross-sym"
+                          aria-hidden="true"
+                          (click)="IsproductImage1 = false; deleteProduct1()"
+                        ></i>
+                        <!-- <P>(click)="editingProductImage1 = ''; IsproductImage1 = false;editimageclear() ;deleteProduct1()"</P> -->
+                      </div>
+
+                      <div class="specs image_specs">
+                        <span class="closewrap">
+                          <div
+                            *ngFor="let url of urls2; let index = index"
+                            class="blockspace"
+                          >
+                            <img
+                              [src]="url"
+                              alt=""
+                              width="100"
+                              height="100"
+                              class="prod-img"
+                            />
+
+                            <i
+                              class="fa fa-times cross-sym"
+                              aria-hidden="true"
+                              (click)="removeSelectedFile2(index)"
+                              *ngIf="RemoveImage2"
+                            ></i>
+                          </div>
+
+                          <button
+                            type="button"
+                            class="btn btn-primary addimage"
+                          >
+                            <span>
+                              <i class="fa fa-plus-circle"></i>
+                              <p>EDIT PRODUCT IMAGE 1</p>
+                            </span>
+                            <input
+                              type="file"
+                              (change)="selectFiles2($event)"
+                              accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                              class="form-control"
+                              id="MODELIMAGEUPLOAD"
+                              formControlName="editProdimage"
+                            />
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="vehicle_image">
+                    <label>Product Image 2</label>
+                    <div class="specs image_specs">
+                      <div class="editing_image" *ngIf="IsproductImage2">
+                        <img
+                          src="{{ BaseUrl }}{{
+                            editProductDetails.productImage2[0]
+                          }}"
+                        />
+                        <i
+                          class="fa fa-times cross-sym"
+                          aria-hidden="true"
+                          (click)="IsproductImage2 = false; deleteProduct2()"
+                        ></i>
+                      </div>
+
+                      <div class="specs image_specs">
+                        <span class="closewrap">
+                          <div
+                            *ngFor="let url of urls3; let index = index"
+                            class="blockspace"
+                          >
+                            <img
+                              [src]="url"
+                              alt=""
+                              width="100"
+                              height="100"
+                              class="prod-img"
+                            />
+
+                            <i
+                              class="fa fa-times cross-sym"
+                              aria-hidden="true"
+                              (click)="removeSelectedFile3(index)"
+                              *ngIf="RemoveImage3"
+                            ></i>
+                          </div>
+
+                          <button
+                            type="button"
+                            class="btn btn-primary addimage"
+                          >
+                            <span>
+                              <i class="fa fa-plus-circle"></i>
+                              <p>EDIT PRODUCT IMAGE 2</p>
+                            </span>
+                            <input
+                              type="file"
+                              (change)="selectFiles3($event)"
+                              accept="image/png, image/jpeg, image/jpg, image/gif, image/bmp, image/webp"
+                              class="form-control"
+                              id="MODELIMAGEUPLOAD"
+                              formControlName="editProdimage1"
+                            />
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label
+                    >Product Name 1
+                    <sup>
+                      <i class="fa fa-asterisk" aria-hidden="true"></i>
+                    </sup>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder=""
+                    class="form-control"
+                    formControlName="productName1"
+                    [class.is-invalid]="
+                      (editProductForm.get('productName1')?.invalid &&
+                        editProductForm.get('productName1')?.touched) ||
+                      (editProductForm.get('productName1')?.pristine &&
+                        hasError)
+                    "
+                  />
+
+                  <span
+                    class="error"
+                    *ngIf="
+                      (editProductForm.get('productName1')?.invalid &&
+                        editProductForm.get('productName1')?.touched) ||
+                      (editProductForm.get('productName1')?.pristine &&
+                        hasError)
+                    "
+                  >
+                    Please enter your Product Name
+                  </span>
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label
+                    >Product Name 2
+                    <!-- <sup>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                  </sup> -->
+                  </label>
+                  <input
+                    type="text"
+                    placeholder=""
+                    class="form-control"
+                    formControlName="productName2"
+                  />
+                </div>
+
+                <div class="col-md-6 form-group">
+                  <label>Product Alias Names :</label>
+                  <button
+                    type="button"
+                    class="add-removes"
+                    (click)="addAlternateAliesGroup('edit')"
+                  >
+                    ADD
+                  </button>
+
+                  <!-- <input type="text" formControlName="aliesGroup" /> -->
+                  <!-- *ngFor="
+                  let email of alternateAliesGroup.controls;
+                  let i = index
+                " -->
+
+                  <div formArrayName="productAliasName">
+                    <div
+                      *ngFor="
+                        let productAName of productAliasNameArray.controls;
+                        let nvalue = index
+                      "
+                    >
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Alias Name"
+                        [formControlName]="nvalue"
+                      />
+                      <button class="add-removes" (click)="removevalue(i)">
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- <div formArrayName="aliesGroup">
+    <div *ngFor="let value of productForm.controls.aliesGroup?.value; let i = index" class="d-flex" formGroupName="i"> 
+      <div [formGroupName]="i">
+        <input type="text" class="form-control form-controlss" formControlName="i">
+        <button class="add-removes" (click)="removevalue(i)">Remove</button>
+      </div>
+    </div>
+    </div>
+                <button class="add-removes" (click)="addvalue()">ADD</button> -->
+                </div>
+
+                <!-- <div class="col-md-6">
+    
+                <img src="{{BaseUrl}}{{editingImage}}" />
+                <div class="specs image_specs">
+                  
+                  <span class="closewrap">
+    
+                    <button type="button" class="btn btn-primary addimage">
+                      <span>
+                        <i class="fa fa-plus-circle"></i>
+                        <p>Product Image</p>
+                      </span>
+                      <input type="file" (change)="selectFiles($event)" multiple class="form-control"
+                        id="prodImage" formControlName="prodImage"
+                        [class.is-invalid]="(editProductForm.get('prodImage')?.invalid && 
+                        editProductForm.get('prodImage')?.touched) ||
+                        (editProductForm.get('prodImage')?.pristine && hasError)
+                        " />
+                        <span class="error" *ngIf="
+                        (editProductForm.get('prodImage')?.invalid &&
+                        editProductForm.get('prodImage')?.touched) ||
+                        (editProductForm.get('prodImage')?.pristine && hasError)
+                        "></span>
+                    </button>
+    
+                    <div *ngFor="let url of urls; let index = index" class="blockspace">
+                      <img [src]="url" alt="" width="100" height="100" />
+    
+                      <i class="fas fa-times" aria-hidden="true" (click)="removeSelectedFile(index)"
+                        *ngIf="RemoveImage"></i>
+                    </div>
+                  </span>
+                </div>
+              </div> -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="editModalReset()"
+        >
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="UpdateVendor()">
+          Update Product
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+<div>
+  <ng-multiselect-dropdown [settings]="dropdownSettings" [data]="languageList" formControlName="selectLanguage">
+  </ng-multiselect-dropdown>
+</div>-->
+
+<!-- product display modal -->
+
+<div
+  class="modal fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Vendor Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- <section class="detailsView" >
+          <div class="userdetailsView" *ngFor="let viewVendorProduct of vendorProductList">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Vendor Name :</label>
+                  <p>{{ viewVendorProduct?.firstName }}{{ viewVendorProduct?.lastName }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Mobile Number :</label>
+                  <p>{{ viewVendorProduct?.mobileNum }}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Alternative Mobile Number :</label>
+                  <p>{{ viewVendorProduct?.altNumber }}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Email Id :</label>
+                  <p>{{ viewVendorProduct?.emailId }}</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

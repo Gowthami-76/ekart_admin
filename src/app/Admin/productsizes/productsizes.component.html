@@ -1,0 +1,138 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Product Size</h4>
+                <div class="create_button" data-toggle="modal" data-target="#exampleModal">
+                    <!-- <button type="btn" class="add-product">Add Product</button> -->
+                    <button type="button" class="productsize">
+                      Add ProductSize
+                    </button>
+                  </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class=" text-primary">
+                            <th>
+                                S.No
+                            </th>
+                            <th>
+                                Product size
+                            </th>
+                            <th>
+                              Action
+                            </th>
+                           
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let sizesList of getallProductsizes; let i = index">
+                                <td>
+                                    {{ i + 1 }}
+                                </td>
+                                <td>
+                                    {{ sizesList?.size }}
+                                </td>
+
+                                <td>
+                                  <button class="btn-blue" type="button" (click)="OnEdit(sizesList)">
+                                    <i class="fa fa-pencil"></i>
+                                  </button>
+                                  <button class="btn-red" type="button" (click)="Delete(sizesList)">
+                                    <i class="fa fa-trash"></i>
+                                  </button>
+                                </td>
+                              
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Create Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Product Size Info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modelClose()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addproductSize">
+          <div class="row">
+          
+           <div class="col-md-6 form-group">
+              <div class="language_list">
+                <label>Product Size&nbsp;<sup>
+                  <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </sup></label>
+              <input type="text" placeholder="Enter Product Size" class="form-control" formControlName="size" />
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="create_size">
+                <button type="btn" (click)="addsize()">Create Size</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--edit model -->
+<div class="modal fade" id="EditProductModal" tabindex="-1" role="dialog" aria-labelledby="EditProductModal"
+aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="EditProductModal">ProductSize Details</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="editSizeForm">
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label>Product Size
+              <sup>
+                <i class="fa fa-asterisk" aria-hidden="true"></i>
+              </sup>
+            </label>
+            <input type="text" placeholder="" class="form-control" formControlName="editSize" [class.is-invalid]="
+                (editSizeForm.get('editSize')?.invalid &&
+                editSizeForm.get('editSize')?.touched) ||
+                (editSizeForm.get('editSize')?.pristine && hasError)
+              " />
+
+            <span class="error" *ngIf="
+                (editSizeForm.get('editSize')?.invalid &&
+                editSizeForm.get('editSize')?.touched) ||
+                (editSizeForm.get('editSize')?.pristine && hasError)
+              ">
+              Please enter your Product Size
+            </span>
+          </div>
+     
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Close
+      </button>
+      <button type="button" class="btn btn-primary" (click)="UpdateSize()">Update Size</button>
+    </div>
+  </div>
+</div>
+</div>

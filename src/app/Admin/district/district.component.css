@@ -1,0 +1,69 @@
+.card {
+    
+}
+
+.card .card-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;      
+} 
+
+#exampleModal .districtaddModal {
+
+}
+
+#exampleModal .districtaddModal label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 13px;
+}
+
+#exampleModal .districtaddModal label i {
+    color: red;
+}
+
+#exampleModal .districtaddModal .add_district_btn {
+    text-align: center;
+    margin: 15px 0px 10px 0px;
+}
+
+#exampleModal .districtaddModal input {
+    height: 40px;
+}
+
+tbody tr td {
+    text-align: center;
+}
+
+.table .text-primary th{
+    text-align: center;
+}
+
+.btn-green{
+    background-color: #6ac16a;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-blue{
+    background-color: #2ab0df;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-red{
+    background-color: #f90d0dc7;
+    border: none;
+    padding: 8px 10px;
+    margin-right: 5px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+

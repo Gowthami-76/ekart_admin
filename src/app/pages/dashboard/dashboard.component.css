@@ -1,0 +1,44 @@
+/* .dashboard-section .card {
+    padding: 20px 15px;
+    border: none;
+    margin-bottom: 20px;
+    border-radius: 17px;
+}
+.dashboard-section .card .card_data h4 {
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 23px;
+    margin-top: 15px!important;
+}
+.dashboard-section .card .card_data .card_count {
+    text-align: end;
+    padding: 0px 15px;
+}
+.dashboard-section .card .card_data .card_count h5 {
+    font-size: 25px;
+    color: #fff;
+} */
+.card:hover {
+    cursor: pointer;
+}
+.c1 {
+    background-color: #9e4ee1;
+}
+.c2 {
+    background-color: #3297e4;
+}
+.c3 {
+    background-color: #67be7e;
+}
+.c4 {
+    background: #4bb19a;
+}
+.c5 {
+    background-color: #ea8859;
+}
+.numbers p{
+    color: #ffff!important;
+}
+.stats{
+    color: #ffff!important;
+}

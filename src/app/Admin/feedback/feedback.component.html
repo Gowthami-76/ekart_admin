@@ -1,0 +1,153 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Feedback Details</h4>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-primary">
+              <th>S.No</th>
+              <th>User Name</th>
+              <th>Feedback</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let feedbacklist of feedbackServices; let i = index">
+                <td>
+                  {{ i + 1 }}
+                </td>
+                <td (click)="getVenderDetails(feedbacklist)">
+                  <p>
+                    {{ feedbacklist.users[0]?.firstName }}
+                    {{ feedbacklist.users[0]?.lastName }}
+                  </p>
+                </td>
+
+                <td>
+                  <p>
+                    {{ feedbacklist?.feedBack }}
+                  </p>
+                </td>
+                <td>
+                  <p>{{ feedbacklist?.date }}</p>
+                </td>
+                <td>
+                  <p>{{ feedbacklist?.time }}</p>
+                </td>
+                <td>
+                  <button
+                    class="btn-red"
+                    type="button"
+                    (click)="delete(feedbacklist)"
+                  >
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-width" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Vendor Details</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <section class="detailsView">
+          <div
+            class="userdetailsView"
+            *ngFor="let viewVendorProduct of vendorProductList"
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Vendor Name :</label>
+                  <p>
+                    {{ viewVendorProduct?.firstName
+                    }}{{ viewVendorProduct?.lastName }}
+                  </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Mobile Number :</label>
+                  <p>{{ viewVendorProduct?.mobileNum }}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Alternative Mobile Number :</label>
+                  <p>{{ viewVendorProduct?.altNumber }}</p>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="User_detailss">
+                  <label>Email Id :</label>
+                  <p>{{ viewVendorProduct?.emailId }}</p>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-6">
+                  <div class="User_detailss">
+                    <label>Size :</label>
+                    <p>{{ viewVendorProduct?.size }}</p>
+                  </div>
+                </div> -->
+              <!-- <div class="col-md-6">
+                  <div class="User_detailss">
+                    <label>Length :</label>
+                    <p>{{ viewVendorProduct?.length }}</p>
+                  </div>
+                </div> -->
+              <!-- <div class="col-md-6">
+                  <div class="User_detailss">
+                    <label>Location :</label>
+                    <p>{{ viewVendorProduct?.location }}</p>
+                  </div>
+                </div> -->
+              <!-- <div class="col-md-6">
+                  <div class="User_detailss">
+                    <label>Quantity :</label>
+                    <p>{{ viewVendorProduct?.quantity }}</p>
+                  </div>
+                </div> -->
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
